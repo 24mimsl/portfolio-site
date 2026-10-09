@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portfolio</title>
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!-- Everything below is filled in from js/content.js. Edit that file, not this one. -->
+<header>
+  <a class="brand" id="brand" href="#home"><img id="logo" alt=""><span id="brandName"></span></a>
+  <nav id="nav" aria-label="Main"></nav>
+  <button class="contact-btn" id="openContact"></button>
+</header>
+
+<main>
+  <section id="page-home">
+    <div class="hero">
+      <div class="sketches" id="sketches" aria-hidden="true"></div>
+      <h1 id="headline"></h1>
+      <div class="hero-row">
+        <img class="portrait" id="portrait" width="240" height="280" alt="">
+        <p class="lede" id="intro"></p>
+      </div>
+    </div>
+    <div class="about">
+      <div><h2 id="aboutTitle"></h2><div id="aboutText"></div></div>
+      <div class="tools"><h2 id="toolsTitle"></h2><div id="toolsList" class="tools"></div></div>
+    </div>
+  </section>
+
+  <section id="page-works" hidden>
+    <h2 class="page-title" id="worksTitle"></h2>
+    <div class="filters" id="filters" role="group" aria-label="Filter works"></div>
+    <div class="grid" id="grid"></div>
+  </section>
+</main>
+
+<footer id="footer"></footer>
+
+<dialog id="contact" aria-labelledby="contactTitle">
+  <button class="close" id="closeContact" aria-label="Close">&times;</button>
+  <h2 id="contactTitle"></h2>
+  <p id="contactMessage"></p>
+  <ul id="contactLinks"></ul>
+</dialog>
+
+<noscript><p style="padding:24px">This site needs JavaScript turned on to display its content.</p></noscript>
+<script src="js/content.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
