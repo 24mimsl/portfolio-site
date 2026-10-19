@@ -37,6 +37,11 @@
   if (H.backgroundSketches) $("sketches").style.backgroundImage = "url('" + H.backgroundSketches + "')";
   $("aboutTitle").textContent = H.aboutTitle;
   H.about.forEach(function (t) { $("aboutText").appendChild(make("p", null, t)); });
+  if (H.resumeFile) {
+    var cv = make("a", "resume-btn", H.resumeLabel || "View my resume");
+    cv.href = H.resumeFile; cv.target = "_blank"; cv.rel = "noopener";
+    $("aboutText").appendChild(cv);
+  }
   $("toolsTitle").textContent = H.toolsTitle;
   H.tools.forEach(function (g) {
     var wrap = make("div", "tool-group");
@@ -46,6 +51,33 @@
     wrap.appendChild(chips);
     $("toolsList").appendChild(wrap);
   });
+  var E = H.education;
+  if (E) {
+    $("educationTitle").textContent = E.title;
+    E.items.forEach(function (ed) {
+      var item = make("div", "edu-item");
+      item.appendChild(make("h3", null, ed.school));
+      if (ed.degree) item.appendChild(make("p", null, ed.degree));
+      if (ed.minor) item.appendChild(make("p", null, ed.minor));
+      if (ed.coursework) item.appendChild(make("p", null, ed.coursework));
+      var meta = [ed.location, ed.dates].filter(Boolean).join(" · ");
+      if (meta) item.appendChild(make("p", "dates", meta));
+      $("educationList").appendChild(item);
+    });
+  }
+  var CE = H.certifications;
+  if (CE) {
+    $("certificationsTitle").textContent = CE.title;
+    CE.items.forEach(function (c) {
+      var item = make("div", "edu-item");
+      item.appendChild(make("h3", null, c.name));
+      if (c.details) item.appendChild(make("p", null, c.details));
+      if (c.dates) item.appendChild(make("p", "dates", c.dates));
+      $("certificationsList").appendChild(item);
+    });
+  } else {
+    $("certificationsBlock").hidden = true;
+  }
 
   /* ----- works ----- */
   var W = S.works;

@@ -11,11 +11,14 @@
   --accent-ink:#FFFFFF;  /* text on accent */
   --font-heading:"Bricolage Grotesque","Instrument Sans",system-ui,sans-serif;
   --font-body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --page-width:1440px;   /* widest the content gets on big screens */
   --sketch-opacity:.16;  /* how strong the drawings behind the headline are */
+  --sketch-height:400px; /* how big the drawings are (smaller = more zoomed out) */
+  --sketch-speed:80s;    /* time for the drawings to drift one full image width (bigger = slower) */
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-padding-top:80px}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--font-body)}
+body{margin:0;overflow-x:clip;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--font-body)}
 h1,h2,h3{font-family:var(--font-heading);margin:0;line-height:1.02;letter-spacing:-.02em}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px}
@@ -30,21 +33,33 @@ nav button[aria-current="page"]{background:var(--ink);color:var(--bg)}
 nav button:hover:not([aria-current="page"]){background:var(--surface)}
 .contact-btn{background:var(--accent);color:var(--accent-ink)}
 
-main{max-width:1120px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,4vw,48px) 96px}
+main{max-width:var(--page-width);margin:0 auto;padding:clamp(28px,6vw,72px) clamp(18px,4vw,48px) 96px}
 [hidden]{display:none !important}
 
 /* home */
-.hero{position:relative;isolation:isolate}
-.sketches{position:absolute;z-index:-1;left:50%;top:-40px;width:min(1400px,100vw);height:calc(100% + 80px);transform:translateX(-50%);background:center/cover no-repeat;opacity:var(--sketch-opacity);mix-blend-mode:multiply;-webkit-mask-image:linear-gradient(#000 60%,transparent);mask-image:linear-gradient(#000 60%,transparent);pointer-events:none}
-.hero h1{font-size:clamp(46px,10vw,120px);font-weight:800;max-width:11ch}
-.hero-row{display:flex;align-items:flex-end;gap:clamp(20px,4vw,48px);margin-top:clamp(28px,4vw,44px)}
-.portrait{width:clamp(140px,22vw,240px);height:auto;aspect-ratio:6/7;object-fit:cover;border-radius:16px;border:1px solid var(--line);display:block}
-.lede{font-size:clamp(19px,2.2vw,24px);max-width:36em;margin:0;color:var(--muted)}
-.about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);margin-top:clamp(48px,8vw,96px)}
-.about h2{font-size:28px;margin-bottom:16px}
-.about p{margin:0 0 1em;max-width:34em}
+.hero{position:relative;isolation:isolate;padding-top:48px}  /* 48px = 1/2 inch of extra space above the headline */
+.sketches{position:absolute;z-index:-1;left:50%;top:-40px;width:100vw;height:calc(100% + 80px);transform:translateX(-50%);background:0 0/auto var(--sketch-height) repeat-x;opacity:var(--sketch-opacity);mix-blend-mode:multiply;--fade:linear-gradient(transparent,#000 calc(var(--sketch-height) * .15),#000 calc(var(--sketch-height) * .6),transparent var(--sketch-height));-webkit-mask-image:var(--fade);mask-image:var(--fade);pointer-events:none;animation:sketch-drift var(--sketch-speed) linear infinite}
+/* moves exactly one image width (the image is 1800x634), so the loop is seamless */
+@keyframes sketch-drift{to{background-position:calc(var(--sketch-height) * 1800 / 634) 0}}
+@media (prefers-reduced-motion:reduce){.sketches{animation:none}}
+.hero h1{font-size:clamp(32px,5.2vw,64px);font-weight:800;max-width:22ch;line-height:1.08;letter-spacing:.01em}
+.portrait{width:clamp(180px,28vw,340px);height:auto;aspect-ratio:6/7;object-fit:cover;border-radius:16px;border:1px solid var(--line);display:block}
+.lede{font-size:clamp(19px,2.2vw,24px);max-width:36em;margin:clamp(28px,4vw,44px) 0 0;color:var(--muted)}
+.lede:empty{display:none}
+.about{display:grid;grid-template-columns:auto 1fr;align-items:start;gap:clamp(28px,5vw,72px);margin-top:clamp(48px,8vw,96px)}
+.about h2,.info-row h2{font-size:28px;margin-bottom:16px}
+.info-row h2{margin-bottom:28px}
+.about p{margin:0 0 1em;max-width:52em}
+.resume-btn{display:inline-block;margin-top:8px;font:600 15px var(--font-body);padding:10px 20px;border-radius:999px;background:var(--accent);color:var(--accent-ink);text-decoration:none}
+.resume-btn:hover{background:var(--ink)}
+.info-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);margin-top:clamp(72px,12vw,160px)}
 .tools{display:grid;gap:22px}
-.tool-group h3{font:600 17px var(--font-body);letter-spacing:0;margin-bottom:10px;color:var(--muted)}
+.education{display:grid;gap:26px}
+.certifications{margin-top:clamp(40px,6vw,64px)}
+.edu-item h3{font-size:20px;margin-bottom:6px;color:var(--accent)}
+.edu-item p{margin:0;max-width:34em}
+.edu-item .dates{color:var(--muted);font-size:15px}
+.tool-group h3{font:600 17px var(--font-body);letter-spacing:0;margin-bottom:10px;color:var(--accent)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{background:var(--surface);border:1px solid var(--line);padding:6px 14px;border-radius:999px;font-size:15px;font-weight:500}
 
@@ -73,11 +88,11 @@ dialog li a{display:flex;justify-content:space-between;gap:12px;padding:12px 16p
 dialog li a:hover{border-color:var(--accent)}
 dialog li span{color:var(--muted);font-weight:400}
 .close{position:absolute;top:14px;right:14px;border:0;background:none;color:var(--ink);font-size:24px;cursor:pointer;line-height:1;padding:6px 10px}
-footer{color:var(--muted);font-size:14px;padding:0 clamp(18px,4vw,48px) 32px;max-width:1120px;margin:0 auto}
+footer{color:var(--muted);font-size:14px;padding:0 clamp(18px,4vw,48px) 32px;max-width:var(--page-width);margin:0 auto}
 
 @media (max-width:760px){
-  .about{grid-template-columns:1fr}
-  .hero-row{flex-direction:column;align-items:flex-start}
+  .about,.info-row{grid-template-columns:1fr}
+  :root{--sketch-height:260px}
   header{flex-wrap:wrap}
   nav{order:3;width:100%}
   nav button{flex:1}

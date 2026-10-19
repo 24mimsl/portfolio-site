@@ -26,28 +26,48 @@ window.SITE_CONTENT = {
 
   /* ---------- HOME PAGE ---------- */
   home: {
-    headline: "I design things you can hold and screens you can use.",
+    headline: "I combine industrial design and UX research to make products that work as well as they look, on the table and on the screen.",
     portrait: "images/portrait.jpg",
     portraitAlt: "Portrait of Logan Mims",
-    intro: "I'm an industrial design student at Rhode Island School of Design, working across physical products and digital interfaces.",
+    intro: "",
     backgroundSketches: "images/sketches-bg.jpg",   // faded drawings behind the headline. Use "" for none.
 
     aboutTitle: "About me",
     // One line of text per paragraph. Add or remove lines freely.
     about: [
-      "I start with how something feels in the hand, then work out how it should behave. Most of my work begins with sketches and foam models and ends in CAD, renders, and working prototypes.",
-      "I got into UI/UX because good products don't stop at the edge of the object. The app, the display, and the packaging are all part of the same experience, so I like to design them together.",
-      "Replace this text with your own story: what you're studying, what you care about, and what you're looking for next."
+      "I’m a designer who works where physical products meet digital interfaces. With a background in industrial and UX design, I move between 3D modeling, user research, and prototyping to create products that feel natural to use, whether you’re holding them or tapping through them. My work centers on technology, soft goods, and home goods. My roots in visual communication and branding help me turn complicated problems into clear, testable ideas."
     ],
+    // Button under the About text. Use "" for file to hide it.
+    resumeLabel: "View my resume",
+    resumeFile: "resume/Logan_Mims_Resume.pdf",
 
     toolsTitle: "Tools I use",
     // Each group has a name and a list of tools.
     tools: [
-      { group: "3D and CAD", items: ["Rhino", "SolidWorks", "Fusion 360", "KeyShot"] },
-      { group: "UI/UX",      items: ["Figma", "FigJam", "Protopie"] },
+      { group: "3D and CAD", items: ["Rhino", "SolidWorks", "KeyShot"] },
+      { group: "UI/UX",      items: ["Figma", "FigJam"] },
       { group: "Graphics",   items: ["Illustrator", "Photoshop", "InDesign"] },
-      { group: "By hand",    items: ["Sketching", "Foam modeling", "Woodshop", "3D printing"] }
-    ]
+      { group: "By hand",    items: ["Sketching", "Foam modeling", "Woodshop", "Metalworking", "3D printing"] }
+    ],
+
+    // Shown next to the tools. Copy a { ... } block to add another school.
+    // Use "" for degree, minor, location, coursework, or dates to leave that line out.
+    education: {
+      title: "Education",
+      items: [
+        { school: "Rhode Island School of Design (RISD)", degree: "BFA in Industrial Design", minor: "Minor in Nature, Culture, and Sustainability Studies (NCSS)", location: "Providence, RI", coursework: "Relevant coursework: Design + Entrepreneurship, Furniture Design, Wood I, Metal I", dates: "Expected May 2028" },
+        { school: "Brown University", degree: "Eco Entrepreneurship", minor: "", location: "Providence, RI", coursework: "", dates: "" }
+      ]
+    },
+
+    // Shown right under Education. Copy a { ... } block to add another certificate.
+    // Use "" for dates or details to leave that line out.
+    certifications: {
+      title: "Certifications",
+      items: [
+        { name: "Google UX Design Professional Certificate", dates: "04/2024 – 07/2024", details: "User-centered research, rapid prototyping, usability testing, and digital-physical integration." }
+      ]
+    }
   },
 
   /* ---------- MY WORKS PAGE ---------- */
@@ -132,9 +152,8 @@ window.SITE_CONTENT = {
     // Each link: label (left), text (right, grey), url.
     // Email links start with mailto:
     links: [
-      { label: "Email",     text: "you@risd.edu",   url: "mailto:you@risd.edu" },
-      { label: "LinkedIn",  text: "/in/yourname",   url: "https://www.linkedin.com/in/yourname" },
-      { label: "Instagram", text: "@yourname",      url: "https://www.instagram.com/yourname" }
+      { label: "Email",    text: "loganmims.design@gmail.com",     url: "mailto:loganmims.design@gmail.com" },
+      { label: "LinkedIn", text: "/in/logan-mims-30923934b",      url: "https://www.linkedin.com/in/logan-mims-30923934b" }
     ]
   }
 };

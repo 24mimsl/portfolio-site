@@ -20,6 +20,14 @@ COMMON EDITS (all in js/content.js)
   Change your name, bio, or tools     Edit the text inside the quote marks.
   Change the top navigation labels    Edit the "label" values under nav.
   Change contact links                Edit the links list under contact.
+  Change your education               Edit the items list under education.
+  Change your certifications          Edit the items list under certifications.
+
+  Update your resume
+    1. Edit resume/resume.html (same rules: change only the text).
+    2. Open it in Chrome or Edge, press Ctrl+P, choose "Save as PDF",
+       set Margins to "None", turn off "Headers and footers", and save it
+       over resume/Logan_Mims_Resume.pdf. Check that it is still one page.
 
   Add a project
     1. Put the image in the images/ folder (JPG or PNG, ideally under 500 KB).
