@@ -373,7 +373,7 @@
       // image + explanation rows, alternating sides
       var rows = make("div", "cs-figures");
       s.figures.forEach(function (f) {
-        var row = make("div", "fig-row"), fig = make("figure", "fig-img"), txt = make("div", "fig-text");
+        var row = make("div", "fig-row"), fig = make("figure", "fig-img" + (f.fit ? " " + f.fit : "")), txt = make("div", "fig-text");
         // one image (src) or several side by side (images: [{src, alt}])
         var pics = f.images || [{ src: f.src, alt: f.alt }];
         if (pics.length > 1) fig.className += " duo";
@@ -393,17 +393,19 @@
           f.list.forEach(function (t) { ul.appendChild(make("li", null, t)); });
           txt.appendChild(ul);
         }
+        // several small headed paragraphs, e.g. product features
+        (f.features || []).forEach(function (ft) {
+          var item = make("div", "fig-feature");
+          item.appendChild(make("h4", null, ft.title));
+          item.appendChild(make("p", null, ft.text));
+          txt.appendChild(item);
+        });
         row.appendChild(fig); row.appendChild(txt);
         rows.appendChild(row);
       });
       sec.appendChild(rows);
     }
-    if (s.fullImage) {
-      var full = make("figure", "cs-full" + (s.fullImageStyle ? " " + s.fullImageStyle : "")), fimg = make("img");
-      fimg.src = s.fullImage; fimg.alt = s.fullImageAlt || ""; fimg.loading = "lazy";
-      full.appendChild(fimg);
-      sec.appendChild(full);
-    } else if (anim) {
+    if (anim) {
       sec.className += " with-image";
       var box = make("div", "thumb cover cs-cover");
       box.innerHTML = anim;
@@ -414,6 +416,13 @@
     } else if (s.type === "text" && s.image !== undefined) {
       sec.className += " with-image";
       sec.appendChild(picture(s.image, s.imageAlt));
+    }
+    // full-width image; can follow a side image (it spans both columns)
+    if (s.fullImage) {
+      var full = make("figure", "cs-full" + (s.fullImageStyle ? " " + s.fullImageStyle : "")), fimg = make("img");
+      fimg.src = s.fullImage; fimg.alt = s.fullImageAlt || ""; fimg.loading = "lazy";
+      full.appendChild(fimg);
+      sec.appendChild(full);
     }
     if (s.type === "research") {
       sec.className += " research";

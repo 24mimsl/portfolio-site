@@ -97,11 +97,240 @@ window.SITE_CONTENT = {
        The order here is the order on the page. */
     projects: [
       {
-        title: "Stapler studies",
+        title: "Pologlow",
         category: "id",
-        description: "Line studies of a desktop stapler from several angles. Replace with your own description.",
-        image: "images/sketch-4.jpg",
-        imageAlt: "Ink sketches of staplers from several angles",
+        description: "An interactive Polaroid-inspired table lamp that stores and displays instant photos in a warm glow.",
+        image: "images/pologlow-glow.jpg",
+        imageAlt: "Pologlow lamp glowing in a dark room, its clear curved shade lighting a stack of photo cards",
+        link: "",
+        caseStudy: {
+          id: "pologlow",                                // page address becomes #works/pologlow
+          accent: "#C81D6B",                             // pink section labels, from the Pologlow title color
+          titleImage: "",
+          subtitle: "An interactive Polaroid-inspired table lamp",
+          heroImage: "images/pologlow-studio.jpg",
+          heroImageAlt: "Studio render of the Pologlow lamp: a clear curved shade over a rotating stack of photo cards on a dark base",
+          heroImageShape: "tall",
+          heroTint: false,
+          facts: [
+            { label: "Role",         value: "Industrial design, prototyping, fabrication" },
+            { label: "Timeline",     value: "6 weeks" },
+            { label: "Tools",        value: "SolidWorks, KeyShot, 3D printing" },
+            { label: "Deliverables", value: "Functional full-scale prototype, production-ready documentation, material specifications" }
+          ],
+          sections: [
+            {
+              type: "text",
+              label: "Overview",
+              title: "Light meets memory",
+              text: [
+                "The Pologlow is a contemporary table lamp inspired by the tactile experience of Polaroid photography. The project explores how a familiar photographic object can be transformed into an interactive lighting experience while preserving the nostalgia and physicality of instant photography."
+              ],
+              figures: [
+                { src: "images/pologlow-dial-sketch.jpg",
+                  alt: "Line drawing of a hand turning the side dial of the Pologlow lamp to flip through its stack of photo cards",
+                  title: "Core challenge",
+                  text: "Collaborate with an established brand to design a tabletop lamp." }
+              ]
+            },
+            {
+              type: "text",
+              label: "Brand research",
+              title: "A small gallery for the moments you’ve captured",
+              text: [
+                "Drawing on Polaroid’s visual language, the Pologlow reimagines the relationship between light and memory. This tabletop lamp doesn’t just illuminate a space, it creates a small gallery for the moments you’ve captured. Its design allows you to store and display your Polaroids, while the warm glow intentionally washes over each photo, bringing their colors and stories forward. The result is an interactive display that turns everyday illumination into a way of honoring memories."
+              ],
+              image: "images/pologlow-brand.jpg",          // beside the text
+              imageAlt: "The Polaroid wordmark and rainbow stripe, softly glowing"
+            },
+            {
+              type: "compare",
+              label: "Rough sketches and planning",
+              title: "Sizing the photo card",
+              softIntro: true,
+              text: [
+                "Early sketch studies explored the photo frame, rotating mechanism, and compact silhouette, testing how the object could feel tactile, display-ready, and easy to use."
+              ],
+              // Drag the divider: sketch on the left, finished card on the right.
+              before: { src: "images/pologlow-sketch.jpg", label: "Sketch",
+                        alt: "Sketch of the photo card: total film size 3.4 by 2.1 inches, photo area 2.4 by 1.8 inches" },
+              after:  { src: "images/pologlow-card.jpg",   label: "Photo card",
+                        alt: "Finished photo card holding a street photo inside a border of pastel squares, with two slots for the rotating axle" }
+            },
+            {
+              type: "text",
+              label: "Form and mechanism ideation",
+              title: "How photos rotate and latch",
+              softIntro: true,
+              text: [
+                "Detail sketches exploring how photos rotate and latch (rotary axle, gear clicks, detents, or rolodex-style sleeves)."
+              ],
+              figures: [
+                { src: "images/pologlow-mechanism-sketch.jpg",
+                  alt: "Notebook sketch of the rotating axle with side knobs, identical rails, and a card stopper, next to a traditional Rolodex cylinder",
+                  title: "Rotating axle",
+                  // notes taken from the sketch annotations
+                  list: [
+                    "Side knobs: increased size for more grip, and more like an old-fashioned camera",
+                    "Easy grip for rotating",
+                    "Identical rails hold each photo card",
+                    "Card stopper keeps cards from falling off",
+                    "Why it works: physics and gravity, compared with a traditional Rolodex’s complete cylinder"
+                  ] }
+              ]
+            },
+            {
+              type: "text",
+              label: "Final design",
+              title: "Built to glow",
+              text: [],
+              figures: [
+                { src: "images/pologlow-glow.jpg",
+                  alt: "Render of the Pologlow lit in a dark room, light spilling through the clear shade onto the photo cards",
+                  title: "A warm wash of light",
+                  text: "When lit, the clear shade washes a warm glow over the displayed photo, bringing its colors forward like a small gallery." },
+                { src: "images/pologlow-orthographic.png",
+                  fit: "natural",                        // small CAD drawing shown at its own size
+                  alt: "Orthographic CAD views of the Pologlow: top, front, and side",
+                  title: "Orthographic views",
+                  text: "Top, front, and side views from the SolidWorks model, part of the production-ready documentation." },
+                { src: "images/pologlow-prototype.jpg",
+                  alt: "3D-printed Pologlow prototype lit from within, with a pink-framed instant photo on the front card",
+                  title: "Full-scale prototype",
+                  text: "A functional full-scale prototype, 3D printed and assembled to test the rotating photo cards and the way light falls across each photo." }
+              ]
+            },
+            {
+              type: "text",
+              label: "Key features",
+              title: "Made to be handled",
+              text: [],
+              figures: [
+                { src: "images/pologlow-features.jpg",
+                  fit: "natural",                        // whole render shown, scaled rather than cropped
+                  alt: "Render of the Pologlow with its shade tilted back and two photo cards flipped open on the central spindle",
+                  features: [
+                    { title: "Movable shade",
+                      text: "The shade is designed with a smooth rotational mechanism that allows it to pivot up to 90 degrees, giving users full control over the direction of light. This adjustability makes it easy to angle illumination precisely to suit individual preferences." },
+                    { title: "Photo rotation",
+                      text: "Photos attached to individual cards are clipped onto a central spindle that can be manually rotated up to 180 degrees. This mechanism allows users to smoothly flip and adjust the photos, encouraging easy interaction and fluid movement during browsing or viewing." },
+                    { title: "Lighting display",
+                      text: "An overhead light is positioned to shine directly onto the photos, enhancing visibility and detail. The light is easily activated with a gentle press and emits a soft pastel glow that subtly illuminates the images without overpowering them." }
+                  ] }
+              ]
+            },
+            {
+              type: "text",
+              label: "Reflection",
+              title: "Next steps",
+              text: [
+                "If taken into mass production, the next step would be resolving the base for injection molding: adding draft angles, internal boss locations for the PCB and weights, and optimizing the rotary spindle for snap-fit assembly to reduce part count.",
+                "Also, because instant film emulsions are sensitive to heat and prolonged direct UV/light exposure, designing the LED enclosure required internal heat management and selecting a low-heat, diffused light source to illuminate the prints safely without degrading the photograph over time."
+              ],
+              fullImage: "images/pologlow-dimensions.png",
+              fullImageAlt: "Dimensioned drawing of the Pologlow: isometric view with a 75-degree shade rotation and 180-degree dial rotation, true radii of 1.25 and 4.85, and a top view measuring 4.75 by 5.95 with a 2.76 diameter knob",
+              fullImageStyle: "drawing"                  // shown at its own size so the linework stays crisp
+            }
+          ]
+        }
+      },
+      {
+        title: "Bentwood Felt Lamp",                     // working title; rename anytime
+        category: "id",
+        description: "A table lamp with curving bent-wood legs and a hand-felted wool shade that softens and colors the light.",
+        image: "images/lamp-glow.jpg",
+        imageAlt: "Lamp glowing warm white: a crumpled felted wool shade on four curving bent-wood legs",
+        link: "",
+        caseStudy: {
+          id: "bentwood-felt-lamp",                      // page address becomes #works/bentwood-felt-lamp
+          titleImage: "",
+          subtitle: "Bent wood and felted wool table lamp",
+          heroImage: "images/lamp-glow.jpg",
+          heroImageAlt: "The lit lamp: a glowing felted wool shade on four curving bent-wood legs",
+          heroImageShape: "tall",
+          heroTint: false,
+          facts: [
+            { label: "Materials", value: "Bent wood laminations, felted wool, brass screws" },
+            { label: "Course",    value: "" },
+            { label: "Year",      value: "" }
+          ],
+          sections: [
+            {
+              type: "images",
+              label: "Initial sketches",
+              title: "Early ideas",
+              text: [],
+              // Empty src shows a grey "Add ..." box until the sketch is added.
+              images: [
+                { src: "", alt: "Initial lamp sketch", hint: "Add an initial sketch" },
+                { src: "", alt: "Initial lamp sketch", hint: "Add an initial sketch" },
+                { src: "", alt: "Initial lamp sketch", hint: "Add an initial sketch" }
+              ]
+            },
+            {
+              type: "text",
+              label: "Process",
+              title: "Building the frame",
+              text: [],
+              figures: [
+                { src: "images/lamp-parts.jpg",
+                  alt: "Four bent wood legs with pre-drilled screw holes laid out beside the wooden center block",
+                  title: "Bent legs and hub",
+                  text: "Four identical legs were bent into a gentle S-curve and drilled to fasten around a central wooden block that holds the bulb." },
+                { src: "images/lamp-frame.jpg",
+                  alt: "The assembled frame without its shade: four curved legs cradling a white globe bulb",
+                  title: "Assembled frame",
+                  text: "Assembled, the legs flare out at the top to cradle the bulb and sweep down to the table like petals." },
+                { src: "images/lamp-joint.jpg",
+                  alt: "Close-up of brass slotted screws fastening two bent legs to the center block",
+                  title: "Brass hardware",
+                  text: "Pairs of brass slotted screws fasten each leg to the hub, left visible as a small detail against the pale wood." }
+              ]
+            },
+            {
+              type: "text",
+              label: "The shade",
+              title: "Felted to diffuse",
+              text: [],
+              figures: [
+                { images: [
+                    { src: "images/lamp-shade-top.jpg",  alt: "Looking down into the glowing felted wool shade" },
+                    { src: "images/lamp-underside.jpg",  alt: "Low view of the bent legs rising into the underside of the felted shade, the bulb glowing inside" }
+                  ],
+                  title: "Soft, uneven light",
+                  text: "The wool shade was felted by hand, so its thickness varies across the surface. Light glows through the thin areas and catches in the folds, giving the lamp an organic, cloud-like texture." }
+              ]
+            },
+            {
+              type: "images",
+              label: "In color",
+              title: "One lamp, many moods",
+              text: [],
+              images: [
+                { src: "images/lamp-blue.jpg",   caption: "Blue",   alt: "The lamp lit deep blue" },
+                { src: "images/lamp-coral.jpg",  caption: "Coral",  alt: "The lamp glowing a warm coral pink" },
+                { src: "images/lamp-violet.jpg", caption: "Violet", alt: "The lamp lit violet and magenta" }
+              ]
+            },
+            {
+              type: "text",
+              label: "Reflection",
+              title: "What I learned",
+              background: "wood",                        // faint wood grain behind the text
+              text: [
+                "This project paired two very different materials: bent wood, which demands precision and planning, and felted wool, which is unpredictable by nature. Bending four matching legs and fastening them cleanly around a single hub taught me how small inconsistencies multiply in a symmetrical form. The felted shade pushed the other way, encouraging me to embrace irregularity and let the material shape how the light is diffused. Moving forward, I would refine the shade’s attachment and explore how its thickness could be controlled to tune the quality of light."
+              ]
+            }
+          ]
+        }
+      },
+      {
+        title: "The Artist Wrap",
+        category: "id",
+        comingSoon: true,                                // shows "Coming soon" over the image, no link. Delete this line to publish it.
+        description: "A denim apron for ceramicists, with gathered straps, bias-bound edges, and a wrap-around tie.",
+        image: "images/softgoods-cover.jpg",
+        imageAlt: "Denim ceramics apron with cream bias binding and a twill tape tie, displayed on a dress form in the sewing studio",
         link: ""
       },
       {
@@ -433,6 +662,74 @@ window.SITE_CONTENT = {
               background: "metal",                       // pale blue brushed metal behind the text
               text: [
                 "This project challenged me to balance creativity with the constraints of working from a single sheet of metal. My intention was to create a design that emphasized the candle as the focal point while using curved forms to add movement and visual interest. Through the fabrication process, I strengthened my skills in sheet metal forming, bending, rolling, and assembly, while gaining a greater appreciation for planning designs that are both manufacturable and aesthetically cohesive."
+              ]
+            }
+          ]
+        }
+      },
+      {
+        title: "Crossbody Tote",                         // working title; rename anytime
+        category: "other",
+        description: "A lined crossbody tote with layered front pockets, braided trim, and a long two-tone strap.",
+        image: "images/bag-front.jpg",
+        imageAlt: "Pink and rust striped tote with a black front pocket panel, braided burgundy trim, and a black strap",
+        link: "",
+        caseStudy: {
+          id: "crossbody-tote",                          // page address becomes #works/crossbody-tote
+          titleImage: "",
+          subtitle: "Lined crossbody tote with layered pockets",
+          heroImage: "images/bag-flat.jpg",
+          heroImageAlt: "The finished tote laid flat, showing the black pocket panel and the long strap looped above",
+          heroImageShape: "tall",
+          heroTint: false,
+          facts: [
+            { label: "Materials", value: "Printed cotton, black nylon, satin lining, braided trim" },
+            { label: "Process",   value: "Pattern cutting, sewing, lining" }
+          ],
+          sections: [
+            {
+              type: "text",
+              label: "Process",
+              title: "From flat pieces to finished bag",
+              text: [],
+              figures: [
+                { src: "images/bag-pieces.jpg",
+                  alt: "Cut satin lining and striped cotton pieces laid out on a gridded cutting table",
+                  title: "Cutting the pattern",
+                  text: "The outer shell and satin lining were cut as matching panels, with notched corners that fold into the bag’s boxed base." },
+                { src: "images/bag-pocket-panel.jpg",
+                  alt: "The front pocket panel before assembly: black nylon with quilted stitch lines, a striped accent band, braided trim, and a shaped pocket",
+                  title: "Building the pocket panel",
+                  text: "The front panel was assembled separately: black nylon with stitched channels, a striped accent band, and a shaped pocket edged in braided trim, before being sewn onto the bag." },
+                { src: "images/bag-interior.jpg",
+                  alt: "Looking down into the tote at the smooth champagne satin lining and the open tops of the front pockets",
+                  title: "Lined interior",
+                  text: "A satin lining finishes the inside, while the front pockets sit open at the top for quick access." }
+              ]
+            },
+            {
+              type: "images",
+              label: "Final piece",
+              title: "Front and back",
+              text: [],
+              images: [
+                { src: "images/bag-angled.jpg", caption: "Front", alt: "Front of the tote at an angle, showing its layered black pockets, braided trim, and strap" },
+                { src: "images/bag-back.jpg",  caption: "Back",  alt: "Back of the tote showing the full striped cotton print and the strap" }
+              ]
+            },
+            {
+              type: "text",
+              label: "Worn",
+              title: "On the shoulder",
+              text: [],
+              figures: [
+                { images: [
+                    { src: "images/bag-worn-front.jpg", alt: "The tote worn over one shoulder, front pockets facing out, strap held at the shoulder" },
+                    { src: "images/bag-worn-back.jpg",  alt: "The tote worn crossbody, seen from behind, resting at the hip" }
+                  ],
+                  fit: "natural",                        // tall photos shown whole, side by side
+                  title: "Sized to carry",
+                  text: "The long strap lets the bag sit at the hip, worn over the shoulder or crossbody, with the front pockets within easy reach." }
               ]
             }
           ]
