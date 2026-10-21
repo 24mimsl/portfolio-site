@@ -97,30 +97,6 @@ window.SITE_CONTENT = {
        The order here is the order on the page. */
     projects: [
       {
-        title: "Cube camera concept",
-        category: "id",
-        description: "Early form and mounting explorations for a compact camera. Replace with the problem, your role, and the result.",
-        image: "images/sketch-1.jpg",
-        imageAlt: "Pencil sketches of a cube-shaped camera on an angled stand",
-        link: ""
-      },
-      {
-        title: "Correction tape dispensers",
-        category: "id",
-        description: "Ink and pencil studies of dispenser forms and internal gears. Replace with your own description.",
-        image: "images/sketch-2.jpg",
-        imageAlt: "Ink sketches of correction tape dispensers and gears",
-        link: ""
-      },
-      {
-        title: "Razor form study",
-        category: "id",
-        description: "Marker renderings exploring grip shape and replaceable heads. Replace with your own description.",
-        image: "images/sketch-3.jpg",
-        imageAlt: "Marker sketches of razors with grip and blade head details",
-        link: ""
-      },
-      {
         title: "Stapler studies",
         category: "id",
         description: "Line studies of a desktop stapler from several angles. Replace with your own description.",
