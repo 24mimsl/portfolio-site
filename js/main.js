@@ -30,7 +30,11 @@
 
   /* ----- home ----- */
   var H = S.home;
-  $("headline").textContent = H.headline;
+  // headline can be one string or a list of lines
+  [].concat(H.headline).forEach(function (line, i, all) {
+    var last = all.length > 1 && i === all.length - 1;
+    $("headline").appendChild(make("span", last ? "hl-line hl-statement" : "hl-line", line));
+  });
   $("portrait").src = H.portrait;
   $("portrait").alt = H.portraitAlt || "";
   $("intro").textContent = H.intro;
@@ -150,17 +154,19 @@
     return fig;
   });
 
-  var filterButtons = [{ id: "all", label: W.allLabel || "All" }].concat(W.categories).map(function (c) {
+  var filterButtons = W.categories.concat([{ id: "all", label: W.allLabel || "All" }]).map(function (c) {   // "All" sits last
     var b = make("button", null, c.label);
     b.type = "button";
-    b.setAttribute("aria-pressed", c.id === "all" ? "true" : "false");
-    b.addEventListener("click", function () {
-      filterButtons.forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
-      cards.forEach(function (f) { f.hidden = !(c.id === "all" || f.dataset.category === c.id); });
-    });
+    b.addEventListener("click", function () { selectFilter(c.id); });
+    b.dataset.id = c.id;
     $("filters").appendChild(b);
     return b;
   });
+  function selectFilter(id) {
+    filterButtons.forEach(function (x) { x.setAttribute("aria-pressed", x.dataset.id === id ? "true" : "false"); });
+    cards.forEach(function (f) { f.hidden = !(id === "all" || f.dataset.category === id); });
+  }
+  selectFilter(W.defaultCategory || "all");   // which filter is selected when the page opens
 
   /* ----- case study pages (#works/<id>) ----- */
   var caseById = {};

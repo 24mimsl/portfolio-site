@@ -26,7 +26,12 @@ window.SITE_CONTENT = {
 
   /* ---------- HOME PAGE ---------- */
   home: {
-    headline: "I combine industrial design and UX research to make products that work as well as they look, on the table and on the screen.",
+    // Each item starts on its own line in the big headline.
+    headline: [
+      "INDUSTRIAL DESIGNER",
+      "+ UX/UI DESIGNER",
+      "I make things, take them apart, and figure out how they could work better."
+    ],
     portrait: "images/portrait.jpg",
     portraitAlt: "Portrait of Logan Mims",
     intro: "",
@@ -35,7 +40,8 @@ window.SITE_CONTENT = {
     aboutTitle: "About me",
     // One line of text per paragraph. Add or remove lines freely.
     about: [
-      "I’m a designer who works where physical products meet digital interfaces. With a background in industrial and UX design, I move between 3D modeling, user research, and prototyping to create products that feel natural to use, whether you’re holding them or tapping through them. My work centers on technology, soft goods, and home goods. My roots in visual communication and branding help me turn complicated problems into clear, testable ideas."
+      "I’m a designer who works where physical products meet digital interfaces. I like figuring out how things work, taking them apart, sketching possibilities, building prototypes, and seeing how an idea changes once it’s in my hands. As an Industrial Design student at RISD, I move between 3D modeling, user research, fabrication, and digital prototyping to create products and experiences that feel natural to use, whether you’re holding them or tapping through them.",
+      "My work explores technology, home goods, soft goods, and the everyday objects we interact with. I’m interested in the space between making and problem-solving, using iteration and visual communication to turn complicated ideas into something tangible and understandable."
     ],
     // Button under the About text. Use "" for file to hide it.
     resumeLabel: "View my resume",
@@ -44,10 +50,10 @@ window.SITE_CONTENT = {
     toolsTitle: "Tools I use",
     // Each group has a name and a list of tools.
     tools: [
-      { group: "3D and CAD", items: ["Rhino", "SolidWorks", "KeyShot"] },
+      { group: "CAD and other software", items: ["Rhino", "SolidWorks", "KeyShot", "Arduino IDE"] },
       { group: "UI/UX",      items: ["Figma", "FigJam"] },
       { group: "Graphics",   items: ["Illustrator", "Photoshop", "InDesign"] },
-      { group: "By hand",    items: ["Sketching", "Foam modeling", "Woodshop", "Metalworking", "3D printing"] }
+      { group: "By hand",    items: ["Sketching", "Foam modeling", "Woodshop", "Metalworking", "3D printing", "Machine sewing"] }
     ],
 
     // Shown next to the tools. Copy a { ... } block to add another school.
@@ -82,6 +88,7 @@ window.SITE_CONTENT = {
       { id: "other", label: "Crafting & Making" }
     ],
 
+    defaultCategory: "id",       // filter selected when the page opens ("id", "ux", "other", or "all")
     linkLabel: "View project",   // text on a project's link, if it has one
     caseStudyLabel: "View case study",   // text on the link to a project's case study page
     backLabel: "← All works",            // link at the top of a case study page
@@ -327,11 +334,66 @@ window.SITE_CONTENT = {
       {
         title: "The Artist Wrap",
         category: "id",
-        comingSoon: true,                                // shows "Coming soon" over the image, no link. Delete this line to publish it.
+        comingSoon: true,                                // shows "Coming soon" over the image and hides the case study. Delete this line to publish it.
         description: "A denim apron for ceramicists, with gathered straps, bias-bound edges, and a wrap-around tie.",
         image: "images/softgoods-cover.jpg",
         imageAlt: "Denim ceramics apron with cream bias binding and a twill tape tie, displayed on a dress form in the sewing studio",
-        link: ""
+        link: "",
+        caseStudy: {
+          id: "artist-wrap",                             // page address becomes #works/artist-wrap
+          titleImage: "",
+          subtitle: "A wrap apron for ceramicists",
+          heroImage: "images/softgoods-cover.jpg",
+          heroImageAlt: "Denim wrap apron with cream bias binding and a twill tape tie on a dress form",
+          heroImageShape: "tall",
+          heroTint: false,
+          facts: [
+            { label: "Materials", value: "Denim, cotton bias binding" },
+            { label: "Software",  value: "Adobe Illustrator" },
+            { label: "Course",    value: "Softgoods" },
+            { label: "Year",      value: "2026" }
+          ],
+          // Anything left as "" shows a grey "Add ..." hint until it's filled in.
+          sections: [
+            {
+              type: "text",
+              label: "Overview",
+              title: "Made for the studio",
+              text: []
+            },
+            {
+              type: "text",
+              label: "Initial sketches",
+              title: "Designed around the wheel",
+              text: [],
+              fullImage: "images/apron-sketches.jpg",
+              fullImageAlt: "Three sketches: a ceramicist at the wheel wearing the wrap apron, the apron laid flat with its gathered neckline and tie, and a three-quarter view showing the wrap, ruffle, and pocket",
+              fullImageStyle: "drawing"
+            },
+            {
+              type: "text",
+              label: "Process",
+              title: "Pattern to finished piece",
+              text: [],
+              figures: [
+                { src: "images/apron-pattern.jpg",
+                  alt: "Paper pattern pieces for the apron's right and left panels and pocket, labeled and weighted on a cutting table",
+                  title: "Drafting the pattern",
+                  text: "Each side of the wrap was drafted as its own paper pattern, labeled for the shoulder, the pocket placement, and where the wrap panel attaches to the right side." },
+                { src: "images/apron-sewn.jpg",
+                  alt: "The two denim apron panels sewn and bound in cream bias tape, joined by the gathered neck strap, laid on a wood floor",
+                  title: "Sewing and binding",
+                  text: "The denim panels were edged in cream bias binding and joined by a gathered strap that sits at the back of the neck, with the pocket stitched onto the front panel." }
+              ]
+            },
+            {
+              type: "text",
+              label: "Reflection",
+              title: "What I learned",
+              text: []
+            }
+          ]
+        }
       },
       {
         title: "Edify",
