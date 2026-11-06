@@ -104,10 +104,167 @@ window.SITE_CONTENT = {
        The order here is the order on the page. */
     projects: [
       {
+        title: "The Artist Wrap",
+        category: "id",
+        description: "A denim apron for multimedia artists, with gathered straps, bias-bound edges, and a wrap-around tie.",
+        image: "images/apron-front.jpg",
+        imageFit: "contain",                             // show the whole photo on the card, not a crop
+        imageBackground: "#fff",                        // photo has a white background, so fill the sides white
+        imageAlt: "Front view of the denim wrap apron worn over a green sweatshirt, with cream bias binding and a twill tie at the waist",
+        link: "",
+        caseStudy: {
+          id: "artist-wrap",                             // page address becomes #works/artist-wrap
+          // "editorial" = portfolio-deck look: giant faded title, cut-out photo, numbered sections.
+          // Delete this line to go back to the standard case study layout.
+          layout: "editorial",
+          ghost: [],                                     // huge faded words behind the photo, e.g. ["ARTIST", "WRAP"]; [] for none
+          year: "2026",                                  // top-right corner of the header
+          duration: "2 weeks",
+          titleImage: "",
+          subtitle: "A wrap apron for multimedia artists",
+          summary: "The Artist Wrap is a denim apron designed for multimedia artists who move between paint, clay, fabric, foam, and the shop. Two panels cross over the front of the body, a gathered strap spreads the weight across the back of the neck, and a long twill tie wraps around the waist, so the apron stays close while you lean, reach, and switch between materials.",
+          heroImage: "images/apron-front.jpg",          // white background disappears into the grey header
+          heroImageAlt: "Front view of the denim wrap apron worn over a green sweatshirt, with cream bias binding and a twill tie at the waist",
+          facts: [
+            { label: "Materials", value: "Denim, cotton bias binding, twill tape" },
+            { label: "Software",  value: "Adobe Illustrator" },
+            { label: "Course",    value: "Softgoods" }
+          ],
+          sections: [
+            {
+              type: "timeline",                          // dots on a line, paragraph underneath
+              label: "Context",
+              title: "Context & problems",
+              text: [
+                "Multimedia artists rarely stay with one material. In a single day they might paint, sculpt, sew, sand foam, and work in the shop, sitting at a bench one moment and standing over a table the next. Most studio aprons are a single flat panel that hangs from the neck, so it tugs every time you lean in and leaves the sides open. That gap between how artists actually move and what they wear became the starting point for this project."
+              ],
+              steps: [
+                { title: "Many materials",    text: "Artists switch between paint, clay, fabric, foam, and tools, often in the same session." },
+                { title: "Mess everywhere",   text: "Paint, dust, glue, and shavings land on the lap, chest, and sleeves." },
+                { title: "Strain at the neck", text: "A standard bib hangs from one neck strap that pulls whenever you lean forward." },
+                { title: "Opportunity",       text: "An apron that wraps around the body and moves with it, instead of hanging off it." }
+              ],
+              // slowly scrolling strip of common studio aprons, left of the text. Swap src for photos anytime.
+              marqueeLabel: "Common studio aprons",
+              marquee: [
+                { src: "images/std-apron-bib.svg",       caption: "Bib apron",       text: "Hangs from the neck and leaves the sides open.",
+                  alt: "Line drawing of a standard bib apron with a neck loop, waist ties, and a front pocket" },
+                { src: "images/std-apron-crossback.svg", caption: "Cross-back apron", text: "Straps can bunch and slide when you reach.",
+                  alt: "Line drawing of a cross-back apron with two straps crossing behind the shoulders" },
+                { src: "images/std-apron-waist.svg",     caption: "Waist apron",     text: "Covers the lap but leaves the chest exposed.",
+                  alt: "Line drawing of a waist apron with a tie band and a row of pockets" },
+                { src: "images/std-apron-smock.svg",     caption: "Painter’s smock", text: "Full coverage, but bulky sleeves get in the way.",
+                  alt: "Line drawing of a long-sleeved painter's smock with a button front and pocket" }
+              ]
+            },
+            {
+              type: "text",
+              label: "",                                 // no small heading above the title
+              title: "The solution",
+              fullWidth: true,
+              text: [
+                "The Artist Wrap opens flat into two denim panels joined by a single gathered neck strap. One panel carries a ruffled edge and a pocket, the other a wrap-around front with a grommet for the tie, so when it’s on, the two halves overlap across the body and the long twill tape pulls everything close at the waist."
+              ],
+              fullImage: "images/apron-flat.jpg",
+              fullImageAlt: "The denim wrap apron laid flat on white: two teardrop-shaped panels joined by a gathered neck strap, edged in cream bias binding, with a ruffled pocket panel on the left and a wrap panel with a grommet and loose twill tape tie on the right",
+              fullImageStyle: "photo"
+            },
+            {
+              type: "goals",                             // text left, numbered boxes right
+              label: "Concept",
+              title: "A wrap, not a bib",
+              text: [
+                "Instead of one panel tied behind the neck, the Artist Wrap is built from two panels that cross over the front like a wrap top. The overlap doubles the coverage where mess lands most, and because the tie wraps around the waist, the apron hugs the body rather than swinging away from it.",
+                "Denim was chosen for its weight and durability, and cream bias binding outlines every edge so the wrapped shape reads clearly."
+              ],
+              goals: [
+                { title: "Cover what gets messy", text: "Protect the lap and chest from paint, dust, glue, and shavings." },
+                { title: "Move with the body",    text: "Stay in place while sitting, leaning, and reaching, without pulling at the neck." },
+                { title: "Simple to put on",      text: "Slip it on, wrap the tie, and knot it in seconds, even with messy hands." }
+              ]
+            },
+            {
+              type: "text",
+              label: "Ideation",
+              title: "Designed around the artist",
+              text: [
+                "The sketches started with the artist, not the apron: how they sit and stand while they work, where their arms rest, and where mess ends up. From there I worked out how a wrapped front, a gathered neckline, and a pocket could come together in one piece, then drew the apron flat to plan how it would be cut and sewn."
+              ],
+              fullImage: "images/apron-sketches.jpg",
+              fullImageAlt: "Three sketches: an artist seated on a stool wearing the wrap apron, the apron laid flat with its gathered neckline and tie, and a three-quarter view showing the wrap, ruffle, and pocket",
+              fullImageStyle: "drawing"
+            },
+            {
+              type: "flow",                              // images in a row, arrows between captions
+              label: "Progress",
+              title: "Pattern to finished piece",
+              text: [
+                "Over two weeks the apron went from a paper pattern to a sewn prototype to a finished piece, with fittings along the way to adjust how far the panels overlap and how long the strap and tie should be."
+              ],
+              steps: [
+                { src: "images/apron-pattern.jpg",
+                  alt: "Paper pattern pieces for the apron's right and left panels and pocket, labeled and weighted on a cutting table",
+                  caption: "Drafting the pattern",
+                  text: "Each side of the wrap was drafted as its own paper pattern, labeled for the shoulder, the pocket placement, and where the wrap panel attaches to the right side." },
+                { src: "images/apron-sewn.jpg",
+                  alt: "The two denim apron panels sewn and bound in cream bias tape, joined by the gathered neck strap, laid on a wood floor",
+                  caption: "Sewing and binding",
+                  text: "The denim panels were edged in cream bias binding and joined by a gathered strap that sits at the back of the neck, with the pocket stitched onto the front panel." },
+                { src: "images/softgoods-cover.jpg",
+                  alt: "The finished denim wrap apron on a dress form in the sewing studio",
+                  caption: "Fitting",
+                  text: "On the dress form, I checked how the panels overlap, where the pocket falls, and how the tie sits at the waist." }
+              ]
+            },
+            {
+              type: "showcase",                          // big rounded photos + feature notes
+              label: "",                                 // no small heading above the title
+              title: "The finished wrap",
+              text: [
+                "The final apron is cut from mid-weight denim and finished in cream cotton bias binding. Worn, the two panels settle into a soft diagonal across the body, and the twill tie can be knotted at the side or the front."
+              ],
+              images: [
+                { src: "images/apron-front.jpg",
+                  alt: "Front view of the denim wrap apron worn over a green sweatshirt, showing the gathered neck strap, cream bias binding, wrap-around tie, and front pocket" },
+                { src: "images/apron-worn.jpg",
+                  square: true,                          // sharp corners
+                  alt: "Wearing the denim wrap apron in the shop while shaping a foam block with a rasp, the gathered strap and cream-bound edges in focus" }
+              ],
+              notes: [
+                { title: "Gathered strap",  text: "Shirred at the back of the neck to spread the weight and add a little stretch." },
+                { title: "Bias-bound edges", text: "Cream binding finishes every curve and outlines the wrapped shape." },
+                { title: "Wrap-around tie", text: "A long twill tape circles the waist, pulling the apron close to the body." },
+                { title: "Front pocket",     text: "Sized for brushes, pencils, or small tools, within easy reach while you work." }
+              ]
+            },
+            {
+              type: "banner",                            // full-width photo with the text on top
+              label: "In use",
+              title: "Made for the mess.",
+              text: [],
+              image: "images/apron-worn.jpg",
+              imageAlt: "Wearing the denim wrap apron in the shop while shaping a foam block with a rasp",
+              position: "30% 35%"
+            },
+            {
+              type: "text",
+              label: "Reflection",
+              title: "",                                 // big heading removed (was "What I learned")
+              fullWidth: true,                           // text spans the whole page width
+              text: [
+                "Sewing a wrapped garment showed me how much a flat pattern changes once it’s on a body. Small changes to the overlap and the strap length made a big difference in how the apron moved, and binding every curved edge taught me patience and precision with bias tape.",
+                "Next, I’d test the apron with artists across different studios, add a towel loop and a second tool pocket, and try a waxed or water-resistant denim that holds up better to paint and wet materials."
+              ]
+            }
+          ]
+        }
+      },
+      {
         title: "Pologlow",
         category: "id",
         description: "An interactive Polaroid-inspired table lamp that stores and displays instant photos in a warm glow.",
         image: "images/pologlow-glow.jpg",
+        imageFit: "contain",                             // show the whole photo on the card, not a crop
         imageAlt: "Pologlow lamp glowing in a dark room, its clear curved shade lighting a stack of photo cards",
         link: "",
         caseStudy: {
@@ -243,9 +400,10 @@ window.SITE_CONTENT = {
       },
       {
         title: "Bentwood Felt Lamp",                     // working title; rename anytime
-        category: "id",
+        category: "other",                               // Crafting & Making
         description: "A table lamp with curving bent-wood legs and a hand-felted wool shade that softens and colors the light.",
         image: "images/lamp-glow.jpg",
+        imageFit: "contain",                             // show the whole lamp on the card, not a crop
         imageAlt: "Lamp glowing warm white: a crumpled felted wool shade on four curving bent-wood legs",
         link: "",
         caseStudy: {
@@ -327,70 +485,6 @@ window.SITE_CONTENT = {
               text: [
                 "This project paired two very different materials: bent wood, which demands precision and planning, and felted wool, which is unpredictable by nature. Bending four matching legs and fastening them cleanly around a single hub taught me how small inconsistencies multiply in a symmetrical form. The felted shade pushed the other way, encouraging me to embrace irregularity and let the material shape how the light is diffused. Moving forward, I would refine the shade’s attachment and explore how its thickness could be controlled to tune the quality of light."
               ]
-            }
-          ]
-        }
-      },
-      {
-        title: "The Artist Wrap",
-        category: "id",
-        comingSoon: true,                                // shows "Coming soon" over the image and hides the case study. Delete this line to publish it.
-        description: "A denim apron for ceramicists, with gathered straps, bias-bound edges, and a wrap-around tie.",
-        image: "images/softgoods-cover.jpg",
-        imageAlt: "Denim ceramics apron with cream bias binding and a twill tape tie, displayed on a dress form in the sewing studio",
-        link: "",
-        caseStudy: {
-          id: "artist-wrap",                             // page address becomes #works/artist-wrap
-          titleImage: "",
-          subtitle: "A wrap apron for ceramicists",
-          heroImage: "images/softgoods-cover.jpg",
-          heroImageAlt: "Denim wrap apron with cream bias binding and a twill tape tie on a dress form",
-          heroImageShape: "tall",
-          heroTint: false,
-          facts: [
-            { label: "Materials", value: "Denim, cotton bias binding" },
-            { label: "Software",  value: "Adobe Illustrator" },
-            { label: "Course",    value: "Softgoods" },
-            { label: "Year",      value: "2026" }
-          ],
-          // Anything left as "" shows a grey "Add ..." hint until it's filled in.
-          sections: [
-            {
-              type: "text",
-              label: "Overview",
-              title: "Made for the studio",
-              text: []
-            },
-            {
-              type: "text",
-              label: "Initial sketches",
-              title: "Designed around the wheel",
-              text: [],
-              fullImage: "images/apron-sketches.jpg",
-              fullImageAlt: "Three sketches: a ceramicist at the wheel wearing the wrap apron, the apron laid flat with its gathered neckline and tie, and a three-quarter view showing the wrap, ruffle, and pocket",
-              fullImageStyle: "drawing"
-            },
-            {
-              type: "text",
-              label: "Process",
-              title: "Pattern to finished piece",
-              text: [],
-              figures: [
-                { src: "images/apron-pattern.jpg",
-                  alt: "Paper pattern pieces for the apron's right and left panels and pocket, labeled and weighted on a cutting table",
-                  title: "Drafting the pattern",
-                  text: "Each side of the wrap was drafted as its own paper pattern, labeled for the shoulder, the pocket placement, and where the wrap panel attaches to the right side." },
-                { src: "images/apron-sewn.jpg",
-                  alt: "The two denim apron panels sewn and bound in cream bias tape, joined by the gathered neck strap, laid on a wood floor",
-                  title: "Sewing and binding",
-                  text: "The denim panels were edged in cream bias binding and joined by a gathered strap that sits at the back of the neck, with the pocket stitched onto the front panel." }
-              ]
-            },
-            {
-              type: "text",
-              label: "Reflection",
-              title: "What I learned",
-              text: []
             }
           ]
         }
@@ -605,6 +699,7 @@ window.SITE_CONTENT = {
         category: "other",
         description: "A sculptural walnut and basswood stand designed to hold and showcase a lathed wooden disc.",
         image: "images/trophy-display.jpg",
+        imageFit: "contain",                             // show the whole photo on the card, not a crop
         imageAlt: "Walnut disc held upright by curving light-wood arms on a sculptural stand",
         link: "",
         caseStudy: {
@@ -734,6 +829,7 @@ window.SITE_CONTENT = {
         category: "other",
         description: "A lined crossbody tote with layered front pockets, braided trim, and a long two-tone strap.",
         image: "images/bag-front.jpg",
+        imageFit: "contain",                             // show the whole photo on the card, not a crop
         imageAlt: "Pink and rust striped tote with a black front pocket panel, braided burgundy trim, and a black strap",
         link: "",
         caseStudy: {
@@ -803,6 +899,7 @@ window.SITE_CONTENT = {
         comingSoon: true,                                // shows "Coming soon" over the image and hides the case study. Delete this line to publish it.
         description: "A small table with a display top for plants and an open base that keeps books and sketchbooks within reach.",
         image: "images/table-styled.jpg",
+        imageFit: "contain",                             // show the whole photo on the card, not a crop
         imageAlt: "Small wooden table with scalloped apron and notched legs, a plant on top and sketchbooks stored underneath",
         link: "",
         caseStudy: {

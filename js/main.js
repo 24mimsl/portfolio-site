@@ -124,6 +124,17 @@
     } else if (p.image) {
       var img = make("img");
       img.src = p.image; img.alt = p.imageAlt || p.title; img.loading = "lazy";
+      if (p.imagePosition) img.style.objectPosition = p.imagePosition;
+      if (p.imageFit === "contain") {
+        // whole photo shown, with a blurred copy filling the empty sides
+        thumb.className += " fit-contain";
+        if (p.imageBackground) thumb.style.background = p.imageBackground;   // solid color instead of the blur
+        else {
+          var fill = make("span", "thumb-fill");
+          fill.style.backgroundImage = "url(\"" + p.image + "\")";
+          thumb.appendChild(fill);
+        }
+      }
       thumb.appendChild(img);
     } else {
       thumb.className = "thumb empty";
@@ -366,10 +377,10 @@
   }
 
   function renderSection(s) {
-    var sec = make("section", "cs-section" + (s.softIntro ? " soft-intro" : "") + (s.background ? " bg-" + s.background : ""));
+    var sec = make("section", "cs-section t-" + s.type + (s.softIntro ? " soft-intro" : "") + (s.fullWidth ? " full-width" : "") + (s.background ? " bg-" + s.background : ""));
     var body = make("div", "cs-text");
     if (s.label) body.appendChild(make("p", "cs-label", s.label));
-    body.appendChild(make("h2", null, s.title));
+    if (s.title) body.appendChild(make("h2", null, s.title));   // title: "" leaves the big heading out
     (s.text || []).forEach(function (t) { body.appendChild(make("p", null, t)); });
     if (s.type === "text" && !(s.text && s.text.length) && !s.figures && !s.fullImage) body.appendChild(textOr("p", "", "Add text for this section."));
     sec.appendChild(body);
@@ -517,7 +528,150 @@
         sec.appendChild(a);
       }
     }
+    // dots on a line with a short note under each (context & problems)
+    if (s.type === "timeline") {
+      var tl = make("ol", "cs-timeline");
+      tl.style.setProperty("--n", (s.steps || []).length);
+      (s.steps || []).forEach(function (st) {
+        var li = make("li");
+        if (st.title) li.appendChild(make("h3", null, st.title));
+        li.appendChild(make("p", null, st.text));
+        tl.appendChild(li);
+      });
+      sec.appendChild(tl);
+      // slowly scrolling strip of images beside the text (marquee: [{src, caption, text}])
+      if (s.marquee) {
+        var row = make("div", "tl-row"), mq = make("div", "cs-marquee"), track = make("div", "mq-track");
+        mq.setAttribute("role", "region");
+        mq.setAttribute("aria-label", s.marqueeLabel || "Examples");
+        // two copies back to back so the loop is seamless; the copy is hidden from screen readers
+        [0, 1].forEach(function (copy) {
+          s.marquee.forEach(function (m) {
+            var fig = make("figure", "mq-item"), img = make("img");
+            img.src = m.src; img.alt = copy ? "" : (m.alt || m.caption || ""); img.loading = "lazy";
+            fig.appendChild(img);
+            var cap = make("figcaption");
+            cap.appendChild(make("b", null, m.caption));
+            if (m.text) cap.appendChild(make("span", null, m.text));
+            fig.appendChild(cap);
+            if (copy) fig.setAttribute("aria-hidden", "true");
+            track.appendChild(fig);
+          });
+        });
+        mq.appendChild(track);
+        row.appendChild(mq);
+        row.appendChild(body);   // the Context & problems text moves into the row, on the right
+        sec.appendChild(row);
+      }
+    }
+    // numbered goals in outlined boxes, beside the section text
+    if (s.type === "goals") {
+      var gl = make("ol", "cs-goals");
+      (s.goals || []).forEach(function (g, i) {
+        var li = make("li"), txt = make("div");
+        li.appendChild(make("span", "goal-num", (i < 9 ? "0" : "") + (i + 1)));
+        txt.appendChild(make("h3", null, g.title));
+        if (g.text) txt.appendChild(make("p", null, g.text));
+        li.appendChild(txt);
+        gl.appendChild(li);
+      });
+      sec.appendChild(gl);
+    }
+    // images in a row with arrows between their captions (sketch -> prototype -> production)
+    if (s.type === "flow") {
+      var fl = make("div", "cs-flow"), n = (s.steps || []).length, cols = [];
+      s.steps.forEach(function (st, i) {
+        var c = 2 * i + 1;
+        var pic = make("div", "flow-img" + (st.fit ? " " + st.fit : "")), img = make("img");
+        img.src = st.src; img.alt = st.alt || ""; img.loading = "lazy";
+        pic.appendChild(img);
+        pic.style.setProperty("--c", c);
+        var cap = make("div", "flow-cap");
+        cap.appendChild(make("h3", null, st.caption));
+        if (st.text) cap.appendChild(make("p", null, st.text));
+        cap.style.setProperty("--c", c);
+        fl.appendChild(pic); fl.appendChild(cap);
+        cols.push("minmax(0,1fr)");
+        if (i < n - 1) {
+          var ar = make("span", "flow-arrow");
+          ar.setAttribute("aria-hidden", "true");
+          ar.style.setProperty("--c", c + 1);
+          fl.appendChild(ar);
+          cols.push("clamp(36px,6vw,96px)");
+        }
+      });
+      fl.style.setProperty("--cols", cols.join(" "));
+      sec.appendChild(fl);
+    }
+    // final product: rounded photos side by side, short feature notes below
+    if (s.type === "showcase") {
+      var gridF = make("div", "cs-final");
+      gridF.style.setProperty("--n", (s.images || []).length);
+      (s.images || []).forEach(function (im) {
+        var img = make("img");
+        img.src = im.src; img.alt = im.alt || ""; img.loading = "lazy";
+        if (im.position) img.style.objectPosition = im.position;
+        if (im.square) img.className = "square";   // sharp corners instead of rounded
+        gridF.appendChild(img);
+      });
+      sec.appendChild(gridF);
+      if (s.notes) {
+        var notes = make("div", "cs-notes");
+        s.notes.forEach(function (nt) {
+          var d = make("div");
+          d.appendChild(make("h3", null, nt.title));
+          d.appendChild(make("p", null, nt.text));
+          notes.appendChild(d);
+        });
+        sec.appendChild(notes);
+      }
+    }
+    // full-width photo with the title and text set on top of it
+    if (s.type === "banner") {
+      sec.style.backgroundImage = "linear-gradient(150deg,rgba(14,20,36,.72),rgba(14,20,36,.1) 55%), url(\"" + s.image + "\")";
+      if (s.position) sec.style.backgroundPosition = s.position;
+      if (s.imageAlt) { sec.setAttribute("role", "img"); sec.setAttribute("aria-label", s.imageAlt + ". " + s.title); }
+    }
     return sec;
+  }
+
+  // editorial header: huge faded title behind a cut-out photo, project text bottom right
+  function editorialHero(p, c) {
+    var hero = make("div", "ed-hero");
+    var ghost = make("div", "ed-ghost");
+    ghost.setAttribute("aria-hidden", "true");
+    (c.ghost || p.title.toUpperCase().split(" ")).forEach(function (w) { ghost.appendChild(make("span", null, w)); });
+    hero.appendChild(ghost);
+    if (c.year) hero.appendChild(make("p", "ed-year", c.year));
+    var img = make("img", "ed-photo");
+    img.src = c.heroImage; img.alt = c.heroImageAlt || "";
+    hero.appendChild(img);
+    var intro = make("div", "ed-intro");
+    intro.appendChild(make("p", "kind", labelFor[p.category] || p.category));
+    intro.appendChild(make("h1", "ed-title", p.title));
+    if (c.subtitle) intro.appendChild(make("p", "ed-sub", c.subtitle));
+    if (c.summary) intro.appendChild(make("p", "ed-desc", c.summary));
+    if (c.duration) intro.appendChild(make("p", "ed-duration", "Duration: " + c.duration));
+    var facts = make("dl", "cs-facts");
+    (c.facts || []).forEach(function (f) {
+      facts.appendChild(make("dt", null, f.label));
+      facts.appendChild(textOr("dd", f.value, "Add"));
+    });
+    intro.appendChild(facts);
+    hero.appendChild(intro);
+    // one dot per case study, like the page markers in a printed portfolio
+    var dots = make("nav", "ed-dots");
+    dots.setAttribute("aria-label", "Case studies");
+    W.projects.forEach(function (q) {
+      if (!q.caseStudy || !caseById[q.caseStudy.id]) return;
+      var a = make("a");
+      a.href = "#works/" + q.caseStudy.id;
+      a.title = q.title; a.setAttribute("aria-label", q.title);
+      if (q === p) a.setAttribute("aria-current", "page");
+      dots.appendChild(a);
+    });
+    hero.appendChild(dots);
+    return hero;
   }
 
   function renderCase(p) {
@@ -528,6 +682,23 @@
     var back = make("a", "back", W.backLabel || "← All works");
     back.href = "#works";
     root.appendChild(back);
+    root.classList.toggle("editorial", c.layout === "editorial");
+    if (c.layout === "editorial") {
+      root.appendChild(editorialHero(p, c));
+      var num = 0;
+      (c.sections || []).forEach(function (s) {
+        var sec = renderSection(s);
+        if (s.type !== "banner") {
+          // running header like a slide: section name left, page number right
+          num++;
+          var head = make("div", "cs-head");
+          head.appendChild(make("span", null, s.label || ""));
+          sec.insertBefore(head, sec.firstChild);
+        }
+        root.appendChild(sec);
+      });
+      return;
+    }
 
     var hero = make("div", "cs-hero"), intro = make("div");
     intro.appendChild(make("p", "kind", labelFor[p.category] || p.category));
