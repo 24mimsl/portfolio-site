@@ -670,8 +670,379 @@
       if (q === p) a.setAttribute("aria-current", "page");
       dots.appendChild(a);
     });
-    hero.appendChild(dots);
+    if (c.projectDots) hero.appendChild(dots);   // projectDots: true in content.js brings the side dots back
     return hero;
+  }
+
+  /* =====================================================================
+     STUDIO CASE STUDY (layout: "studio" in content.js) - used by HEARTH.
+     Cream page, sage accents, numbered sections, click-to-enlarge images.
+     ===================================================================== */
+
+  // fade sections in as they scroll into view
+  var revealObs = ("IntersectionObserver" in window) ? new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add("in"); revealObs.unobserve(e.target); }
+    });
+  }, { rootMargin: "0px 0px -6% 0px", threshold: 0.06 }) : null;
+  function reveal(el) {
+    el.classList.add("rv");
+    if (revealObs) revealObs.observe(el); else el.classList.add("in");
+    return el;
+  }
+  var stillMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // full-size image viewer
+  var lightbox;
+  function openLightbox(src, alt) {
+    if (!lightbox) {
+      lightbox = make("dialog", "st-lightbox");
+      lightbox.setAttribute("aria-label", "Enlarged image");
+      var x = make("button", "close", "×");
+      x.type = "button"; x.setAttribute("aria-label", "Close");
+      x.addEventListener("click", function () { lightbox.close(); });
+      lightbox.appendChild(x);
+      lightbox.appendChild(make("img"));
+      lightbox.addEventListener("click", function (e) { if (e.target === lightbox) lightbox.close(); });
+      document.body.appendChild(lightbox);
+    }
+    var big = lightbox.querySelector("img");
+    big.src = src; big.alt = alt || "";
+    lightbox.showModal();
+  }
+
+  // zoom into one spot of a photo: the point at focus (x%, y%) sits in the middle of the frame
+  function cropTo(img, frame, fx, fy, zoom) {
+    function fit() {
+      var fw = frame.clientWidth, fh = frame.clientHeight;
+      if (!fw || !fh || !img.naturalWidth) return;
+      var s = Math.max(fw / img.naturalWidth, fh / img.naturalHeight) * zoom;
+      var w = img.naturalWidth * s, h = img.naturalHeight * s;
+      var left = Math.min(0, Math.max(fw - w, fw / 2 - fx * w));
+      var top = Math.min(0, Math.max(fh - h, fh / 2 - fy * h));
+      img.style.width = w + "px"; img.style.height = h + "px";
+      img.style.left = left + "px"; img.style.top = top + "px";
+    }
+    img.classList.add("cropped");
+    if (img.complete) fit(); else img.addEventListener("load", fit);
+    if ("ResizeObserver" in window) new ResizeObserver(fit).observe(frame);
+    else window.addEventListener("resize", fit);
+  }
+
+  // one image (or a labeled placeholder when src is "")
+  // im: { src, alt, caption, fig, focus: "50% 20%", zoom: 2, fit: "contain", bg, file, hint, ratio }
+  function stPicture(im, cls) {
+    im = im || {};
+    var fig = make("figure", "st-img" + (cls ? " " + cls : ""));
+    var frame;
+    if (!im.src) {
+      frame = make("div", "st-frame st-ph-box");
+      frame.appendChild(make("span", "st-ph-hint", im.hint || "Add an image"));
+      if (im.file) frame.appendChild(make("code", null, im.file));
+    } else {
+      frame = make("div", "st-frame" + (im.fit === "contain" ? " contain" : ""));
+      var img = make("img");
+      img.src = im.src; img.alt = im.alt || ""; img.loading = "lazy";
+      if (im.bg) frame.style.background = im.bg;
+      var f = (im.focus || "50% 50%").split(" ").map(function (v) { return parseFloat(v) / 100; });
+      if (im.zoom) cropTo(img, frame, f[0], f[1], im.zoom);
+      else if (im.focus) img.style.objectPosition = im.focus;
+      frame.appendChild(img);
+      // click (or Enter) to see the whole image, uncropped
+      frame.tabIndex = 0;
+      frame.setAttribute("role", "button");
+      frame.setAttribute("aria-label", "Enlarge image" + (im.alt ? ": " + im.alt : ""));
+      frame.addEventListener("click", function () { openLightbox(im.src, im.alt); });
+      frame.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openLightbox(im.src, im.alt); }
+      });
+    }
+    if (im.ratio) frame.style.aspectRatio = im.ratio;
+    fig.appendChild(frame);
+    if (im.caption) {
+      var cap = make("figcaption");
+      if (im.fig) cap.appendChild(make("span", "st-fig", im.fig));
+      cap.appendChild(document.createTextNode(im.caption));
+      fig.appendChild(cap);
+    }
+    return fig;
+  }
+
+  function two(n) { return (n < 10 ? "0" : "") + n; }
+  function stTag(num, label) {
+    var t = make("p", "st-tag");
+    t.appendChild(make("span", "st-num", num));
+    t.appendChild(document.createTextNode(label));
+    return t;
+  }
+  // section heading: number + label on the left, title and short intro on the right
+  function stHead(num, s) {
+    var head = make("div", "st-head");
+    head.appendChild(stTag(num, s.label));
+    var main = make("div", "st-head-main");
+    if (s.title) main.appendChild(make("h2", null, s.title));
+    (s.text || []).forEach(function (t) { main.appendChild(make("p", null, t)); });
+    head.appendChild(main);
+    return head;
+  }
+
+  function renderStudio(p, c, root) {
+    var H = c.hero || {};
+    var secs = c.sections || [];
+
+    /* 01 hero */
+    var hero = make("section", "st-hero");
+    hero.id = "st-01";
+    var top = make("div", "st-hero-top");
+    top.appendChild(stTag("01", H.kicker || labelFor[p.category] || ""));
+    if (H.year) top.appendChild(make("p", "st-year", H.year));
+    hero.appendChild(top);
+    hero.appendChild(make("h1", "st-title", H.title || p.title));
+    var body = make("div", "st-hero-body"), txt = make("div", "st-hero-text");
+    if (H.subtitle) txt.appendChild(make("p", "st-sub", H.subtitle));
+    if (H.description) txt.appendChild(make("p", "st-desc", H.description));
+    body.appendChild(txt);
+    var meta = make("dl", "st-meta");
+    (H.meta || []).forEach(function (m) {
+      var row = make("div");
+      row.appendChild(make("dt", null, m.label));
+      row.appendChild(make("dd", null, m.value));
+      meta.appendChild(row);
+    });
+    body.appendChild(meta);
+    hero.appendChild(body);
+    hero.appendChild(stPicture(H.image, "st-hero-img"));
+    // quick links to each section (smooth scroll)
+    var index = make("nav", "st-index");
+    index.setAttribute("aria-label", "Sections");
+    secs.forEach(function (s, i) {
+      var b = make("button");
+      b.type = "button";
+      b.appendChild(make("span", null, two(i + 2)));
+      b.appendChild(document.createTextNode(s.label));
+      b.addEventListener("click", function () {
+        $("st-" + two(i + 2)).scrollIntoView({ behavior: stillMotion ? "auto" : "smooth", block: "start" });
+      });
+      index.appendChild(b);
+    });
+    hero.appendChild(index);
+    root.appendChild(hero);
+
+    /* 02-08 */
+    secs.forEach(function (s, i) {
+      var num = two(i + 2);
+      var sec = make("section", "st-sec st-" + s.type);
+      sec.id = "st-" + num;
+
+      // reflection: text over a faded nature photo, then next project / all works
+      if (s.type === "reflection") {
+        if (s.background) {
+          var bg = make("div", "st-refl-bg");
+          bg.setAttribute("aria-hidden", "true");
+          bg.style.backgroundImage = "url(\"" + s.background + "\")";
+          if (s.backgroundPosition) bg.style.backgroundPosition = s.backgroundPosition;
+          if (s.backgroundZoom) bg.style.backgroundSize = (s.backgroundZoom * 100) + "% auto";
+          sec.appendChild(bg);
+        }
+        var inner = make("div", "st-refl-inner");
+        inner.appendChild(stHead(num, { label: s.label, title: s.title }));
+        var cols = make("div", "st-refl-body");
+        (s.text || []).forEach(function (t) { cols.appendChild(make("p", null, t)); });
+        inner.appendChild(cols);
+        var rnav = make("nav", "st-next");
+        rnav.setAttribute("aria-label", "More projects");
+        var rlist = W.projects.filter(function (q) { return q.caseStudy && caseById[q.caseStudy.id]; });
+        var rnext = rlist[(rlist.indexOf(p) + 1) % rlist.length];
+        if (rnext && rnext !== p) {
+          var ra = make("a");
+          ra.href = "#works/" + rnext.caseStudy.id;
+          ra.appendChild(make("span", null, s.nextLabel || "Next project"));
+          ra.appendChild(make("b", null, rnext.title + " →"));
+          rnav.appendChild(ra);
+        }
+        var rb = make("a");
+        rb.href = "#works";
+        rb.appendChild(make("span", null, s.backLabel || "Portfolio"));
+        rb.appendChild(make("b", null, "← All works"));
+        rnav.appendChild(rb);
+        inner.appendChild(rnav);
+        sec.appendChild(inner);
+        root.appendChild(reveal(sec));
+        return;
+      }
+
+      if (s.type === "closing") {
+        var grid = make("div", "st-closing-grid");
+        grid.appendChild(stPicture(s.image, "st-closing-img"));
+        var side = make("div", "st-closing-text");
+        side.appendChild(stTag(num, s.label));
+        side.appendChild(make("h2", "st-closing-title", s.title || p.title));
+        (s.text || []).forEach(function (t) { side.appendChild(make("p", null, t)); });
+        // next project + back to all works
+        var nav = make("nav", "st-next");
+        nav.setAttribute("aria-label", "More projects");
+        var list = W.projects.filter(function (q) { return q.caseStudy && caseById[q.caseStudy.id]; });
+        var next = list[(list.indexOf(p) + 1) % list.length];
+        if (next && next !== p) {
+          var a = make("a");
+          a.href = "#works/" + next.caseStudy.id;
+          a.appendChild(make("span", null, s.nextLabel || "Next project"));
+          a.appendChild(make("b", null, next.title + " →"));
+          nav.appendChild(a);
+        }
+        var back = make("a");
+        back.href = "#works";
+        back.appendChild(make("span", null, s.backLabel || "Portfolio"));
+        back.appendChild(make("b", null, "← All works"));
+        nav.appendChild(back);
+        side.appendChild(nav);
+        grid.appendChild(side);
+        sec.appendChild(grid);
+        root.appendChild(reveal(sec));
+        return;
+      }
+
+      sec.appendChild(stHead(num, s));
+
+      if (s.type === "concept") {
+        var feats = make("div", "st-features");
+        (s.features || []).forEach(function (ft, j) {
+          var art = make("article", "st-feature");
+          art.appendChild(stPicture(ft.image));
+          var h3 = make("h3");
+          h3.appendChild(make("span", "st-fnum", two(j + 1)));
+          h3.appendChild(document.createTextNode(ft.title));
+          art.appendChild(h3);
+          art.appendChild(make("p", null, ft.text));
+          feats.appendChild(art);
+        });
+        sec.appendChild(feats);
+      }
+
+      if (s.type === "moodboard") {
+        var mood = make("div", "st-mood");
+        (s.items || []).forEach(function (it, j) {
+          it.fig = it.fig || "Fig. " + num + "." + (j + 1);
+          mood.appendChild(stPicture(it, "m-" + (it.size || "md")));
+        });
+        sec.appendChild(mood);
+        if (s.palette) {
+          var pal = make("div", "st-palette-wrap");
+          pal.appendChild(make("p", "st-mini", s.paletteTitle || "Color exploration"));
+          var ul = make("ul", "st-palette");
+          s.palette.forEach(function (col) {
+            var li = make("li"), sw = make("span", "sw");
+            sw.style.background = col.color;
+            li.appendChild(sw);
+            li.appendChild(make("b", null, col.name));
+            li.appendChild(make("span", null, col.color + (col.note ? " · " + col.note : "")));
+            ul.appendChild(li);
+          });
+          pal.appendChild(ul);
+          sec.appendChild(pal);
+        }
+      }
+
+      if (s.type === "process") {
+        var ol = make("ol", "st-steps");
+        ol.style.setProperty("--n", (s.steps || []).length);
+        (s.steps || []).forEach(function (st, j) {
+          var li = make("li");
+          li.appendChild(make("span", "st-step-num", two(j + 1)));
+          if (st.images) {
+            // several images stacked in the space of one (e.g. two CAD views)
+            var stack = make("div", "st-stack");
+            stack.style.setProperty("--rows", st.images.length);
+            st.images.forEach(function (im) { stack.appendChild(stPicture(im)); });
+            li.appendChild(stack);
+          } else li.appendChild(stPicture(st.image));
+          li.appendChild(make("h3", null, st.title));
+          if (st.text) li.appendChild(make("p", null, st.text));
+          ol.appendChild(li);
+        });
+        sec.appendChild(ol);
+      }
+
+      if (s.type === "details") {
+        var wrap = make("div", "st-anatomy"), legend = make("ol", "st-legend");
+        var stage = make("div", "st-stage"), shot = make("img");
+        shot.src = s.image.src; shot.alt = s.image.alt || ""; shot.loading = "lazy";
+        if (s.image.bg) stage.style.background = s.image.bg;
+        stage.appendChild(shot);
+        var dots = [], items = [];
+        function pick(k) {
+          dots.forEach(function (d, m) { d.classList.toggle("on", m === k); });
+          items.forEach(function (b, m) { b.classList.toggle("on", m === k); });
+        }
+        (s.callouts || []).forEach(function (co, j) {
+          var d = make("button", "st-dot", String(j + 1));
+          d.type = "button";
+          d.style.left = co.x + "%"; d.style.top = co.y + "%";
+          d.setAttribute("aria-label", co.title);
+          d.addEventListener("mouseenter", function () { pick(j); });
+          d.addEventListener("focus", function () { pick(j); });
+          d.addEventListener("click", function () { pick(j); });
+          stage.appendChild(d); dots.push(d);
+          var li = make("li"), b = make("button", "st-leg");
+          b.type = "button";
+          b.appendChild(make("span", "n", two(j + 1)));
+          b.appendChild(make("b", null, co.title));
+          b.appendChild(make("span", "t", co.text));
+          b.addEventListener("mouseenter", function () { pick(j); });
+          b.addEventListener("focus", function () { pick(j); });
+          b.addEventListener("click", function () { pick(j); });
+          li.appendChild(b); legend.appendChild(li); items.push(b);
+        });
+        wrap.appendChild(legend);
+        wrap.appendChild(stage);
+        sec.appendChild(wrap);
+        if (s.exploded) {
+          var ex = make("div", "st-exploded");
+          ex.appendChild(stPicture(s.exploded.image));
+          var et = make("div", "st-exploded-text");
+          et.appendChild(make("p", "st-mini", s.exploded.label || "Exploded view"));
+          et.appendChild(make("h3", null, s.exploded.title));
+          if (s.exploded.text) et.appendChild(make("p", null, s.exploded.text));
+          ex.appendChild(et);
+          sec.appendChild(ex);
+        }
+      }
+
+      if (s.type === "nesting") {
+        var cfg = make("ol", "st-configs");
+        (s.configs || []).forEach(function (cf, j) {
+          var li = make("li");
+          li.appendChild(stPicture(cf.image));
+          var lab = make("p", "st-cfg-label");
+          lab.appendChild(make("span", null, String.fromCharCode(65 + j)));
+          lab.appendChild(document.createTextNode(cf.title));
+          li.appendChild(lab);
+          li.appendChild(make("p", "st-cfg-text", cf.text));
+          cfg.appendChild(li);
+        });
+        sec.appendChild(cfg);
+        if (s.statement) sec.appendChild(make("p", "st-statement", s.statement));
+      }
+
+      if (s.type === "gallery") {
+        var gal = make("div", "st-gal"), wide = 0;
+        (s.rows || []).forEach(function (row) {
+          if (!Array.isArray(row)) {          // { title, images } = a titled sub-group
+            var grp = make("div", "st-gal-group");
+            if (row.title) grp.appendChild(make("h3", "st-gal-title", row.title));
+            gal.appendChild(grp);
+            row = row.images || [];
+          }
+          var r = make("div", "st-row n" + Math.min(row.length, 3));
+          if (row.length === 2 && wide++ % 2) r.className += " alt";   // two-image rows alternate their wide side
+          row.forEach(function (im) { r.appendChild(stPicture(im)); });
+          gal.appendChild(r);
+        });
+        sec.appendChild(gal);
+      }
+
+      root.appendChild(reveal(sec));
+    });
   }
 
   function renderCase(p) {
@@ -683,6 +1054,8 @@
     back.href = "#works";
     root.appendChild(back);
     root.classList.toggle("editorial", c.layout === "editorial");
+    root.classList.toggle("studio", c.layout === "studio");
+    if (c.layout === "studio") { renderStudio(p, c, root); return; }
     if (c.layout === "editorial") {
       root.appendChild(editorialHero(p, c));
       var num = 0;
@@ -780,6 +1153,8 @@
     $("page-home").hidden = page !== "home";
     $("page-works").hidden = page !== "works" || !!project;
     $("page-case").hidden = !project;
+    // warm cream page color for "studio" case studies (HEARTH)
+    document.body.classList.toggle("studio-page", !!(project && project.caseStudy.layout === "studio"));
     if (project) renderCase(project);
     document.title = project ? project.title + " — " + S.name : baseTitle;
     navButtons.forEach(function (b) {

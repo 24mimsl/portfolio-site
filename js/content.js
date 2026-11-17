@@ -104,7 +104,7 @@ window.SITE_CONTENT = {
        The order here is the order on the page. */
     projects: [
       {
-        title: "The Artist Wrap",
+        title: "The Maker’s Wrap",
         category: "id",
         description: "A denim apron for multimedia artists, with gathered straps, bias-bound edges, and a wrap-around tie.",
         image: "images/apron-front.jpg",
@@ -113,16 +113,16 @@ window.SITE_CONTENT = {
         imageAlt: "Front view of the denim wrap apron worn over a green sweatshirt, with cream bias binding and a twill tie at the waist",
         link: "",
         caseStudy: {
-          id: "artist-wrap",                             // page address becomes #works/artist-wrap
+          id: "makers-wrap",                             // page address becomes #works/makers-wrap
           // "editorial" = portfolio-deck look: giant faded title, cut-out photo, numbered sections.
           // Delete this line to go back to the standard case study layout.
           layout: "editorial",
-          ghost: [],                                     // huge faded words behind the photo, e.g. ["ARTIST", "WRAP"]; [] for none
+          ghost: [],                                     // huge faded words behind the photo, e.g. ["MAKER’S", "WRAP"]; [] for none
           year: "2026",                                  // top-right corner of the header
           duration: "2 weeks",
           titleImage: "",
           subtitle: "A wrap apron for multimedia artists",
-          summary: "The Artist Wrap is a denim apron designed for multimedia artists who move between paint, clay, fabric, foam, and the shop. Two panels cross over the front of the body, a gathered strap spreads the weight across the back of the neck, and a long twill tie wraps around the waist, so the apron stays close while you lean, reach, and switch between materials.",
+          summary: "The Maker’s Wrap is a denim apron designed for multimedia artists who move between paint, clay, fabric, foam, and the shop. Two panels cross over the front of the body, a gathered strap spreads the weight across the back of the neck, and a long twill tie wraps around the waist, so the apron stays close while you lean, reach, and switch between materials.",
           heroImage: "images/apron-front.jpg",          // white background disappears into the grey header
           heroImageAlt: "Front view of the denim wrap apron worn over a green sweatshirt, with cream bias binding and a twill tie at the waist",
           facts: [
@@ -163,7 +163,7 @@ window.SITE_CONTENT = {
               title: "The solution",
               fullWidth: true,
               text: [
-                "The Artist Wrap opens flat into two denim panels joined by a single gathered neck strap. One panel carries a ruffled edge and a pocket, the other a wrap-around front with a grommet for the tie, so when it’s on, the two halves overlap across the body and the long twill tape pulls everything close at the waist."
+                "The Maker’s Wrap opens flat into two denim panels joined by a single gathered neck strap. One panel carries a ruffled edge and a pocket, the other a wrap-around front with a grommet for the tie, so when it’s on, the two halves overlap across the body and the long twill tape pulls everything close at the waist."
               ],
               fullImage: "images/apron-flat.jpg",
               fullImageAlt: "The denim wrap apron laid flat on white: two teardrop-shaped panels joined by a gathered neck strap, edged in cream bias binding, with a ruffled pocket panel on the left and a wrap panel with a grommet and loose twill tape tie on the right",
@@ -174,7 +174,7 @@ window.SITE_CONTENT = {
               label: "Concept",
               title: "A wrap, not a bib",
               text: [
-                "Instead of one panel tied behind the neck, the Artist Wrap is built from two panels that cross over the front like a wrap top. The overlap doubles the coverage where mess lands most, and because the tie wraps around the waist, the apron hugs the body rather than swinging away from it.",
+                "Instead of one panel tied behind the neck, the Maker’s Wrap is built from two panels that cross over the front like a wrap top. The overlap doubles the coverage where mess lands most, and because the tie wraps around the waist, the apron hugs the body rather than swinging away from it.",
                 "Denim was chosen for its weight and durability, and cream bias binding outlines every edge so the wrapped shape reads clearly."
               ],
               goals: [
@@ -255,6 +255,218 @@ window.SITE_CONTENT = {
                 "Sewing a wrapped garment showed me how much a flat pattern changes once it’s on a body. Small changes to the overlap and the strap length made a big difference in how the apron moved, and binding every curved edge taught me patience and precision with bias tape.",
                 "Next, I’d test the apron with artists across different studios, add a towel loop and a second tool pocket, and try a waxed or water-resistant denim that holds up better to paint and wet materials."
               ]
+            }
+          ]
+        }
+      },
+      {
+        title: "HEARTH",
+        category: "id",
+        description: "An insulated camping carafe with an integrated nesting cup, designed for compact outdoor storage and easy serving.",
+        image: "images/hearth-three-quarter.jpg",
+        imageAlt: "HEARTH carafe render: a sage green textured vessel with a handle and pouring lid, its brushed metal nesting cup attached at the base",
+        link: "",
+        caseStudy: {
+          id: "hearth",                                  // page address becomes #works/hearth
+          // "studio" = cream page, sage accents, numbered sections, click-to-enlarge images.
+          layout: "studio",
+
+          /* ---- HOW TO EDIT IMAGES ----
+             src:     the image file. Leave "" to show a placeholder box.
+             file:    the file name the placeholder suggests (save your image as that, then copy it into src).
+             focus:   which part of the photo to center, as "left% top%".
+             zoom:    how far to zoom into the focus point (1 = whole frame filled, 2 = twice as close).
+                      Clicking any image always opens the whole, uncropped file. */
+
+          /* 01 HERO */
+          hero: {
+            title: "HEARTH",
+            kicker: "Industrial Design",
+            subtitle: "Insulated Camping Carafe",
+            description: "A portable insulated beverage vessel with an integrated nesting cup designed for compact outdoor storage and convenient serving.",
+            year: "",                                    // e.g. "2026"
+            meta: [
+              { label: "Discipline", value: "Industrial Design" },
+              { label: "Category",   value: "Outdoor Equipment" },
+              { label: "Scope",      value: "Product Development" },
+              { label: "Tools",      value: "Rhino, KeyShot, Adobe Photoshop" }
+            ],
+            image: { src: "images/hearth-sunlight.jpg", focus: "50% 14%",
+                     alt: "HEARTH carafe standing in warm afternoon sunlight, casting a long shadow across a cream surface" }
+          },
+
+          sections: [
+            /* 02 CONCEPT */
+            {
+              type: "concept",
+              label: "Concept",
+              title: "One vessel to carry, pour, and share.",
+              text: [
+                "HEARTH combines a camp carafe and its cup in a single object. The cup rides on the base of the insulated vessel on the way out and comes off at camp, so there’s one less thing to pack."
+              ],
+              features: [
+                { title: "Integrated pouring lid",
+                  text: "Pour straight from the carafe without taking the lid off.",
+                  image: { src: "images/hearth-exploded-metal.jpg", focus: "50% 13.7%", zoom: 2.4,
+                           alt: "Close-up of the HEARTH lid: a sage textured cap with a dark pour tab and threaded underside" } },
+                { title: "Detachable nesting cup",
+                  text: "A brushed metal cup seats onto the base of the carafe for travel and lifts off to serve.",
+                  image: { src: "images/hearth-detached.jpg", focus: "49% 69%", zoom: 2.2,
+                           alt: "Close-up of the HEARTH nesting cup: brushed metal with a sage grip band around its base" } },
+                { title: "Insulated beverage vessel",
+                  text: "An insulated body with a single sculpted handle, finished in a textured sage coating.",
+                  image: { src: "images/hearth-exploded-metal.jpg", focus: "53% 44%", zoom: 2,
+                           alt: "Close-up of the HEARTH carafe body: a sage green textured vessel with a sculpted handle and metal lower section" } }
+              ]
+            },
+
+            /* 03 DESIGN DIRECTION (moodboard) - sizes: "xl" (wide) or "md" (portrait) */
+            {
+              type: "moodboard",
+              label: "Design Direction",
+              title: "Rugged, warm, and quiet.",
+              text: [
+                "Muted outdoor color, textured finishes that hold up to handling, and honest brushed metal."
+              ],
+              items: [
+                { size: "lg", src: "images/hearth-sketches.jpg", fit: "contain", bg: "#fff",
+                  caption: "Sketch exploration: proportions, handles, and stacking cups",
+                  alt: "Sheet of carafe sketches exploring tall vessels with handles, lids, and cups that stack onto the base" },
+                { size: "sm", src: "images/hearth-separated.jpg", focus: "50% 29%", zoom: 5.5,
+                  caption: "Material: textured sage coating",
+                  alt: "Macro view of the pebbled sage green texture on the HEARTH vessel" },
+                { size: "sm", src: "images/hearth-detached.jpg", focus: "49% 66%", zoom: 8,
+                  caption: "Material: brushed metal",
+                  alt: "Macro view of the brushed metal finish on the HEARTH nesting cup" },
+                { size: "full", src: "images/hearth-moodboard.jpg", ratio: "2800 / 928",
+                  caption: "Mood Board and Material Inspiration",
+                  alt: "Mood board of camp stoves, forest campsites, steel cups, insulated bottles, carafes, paper textures, and an earthy color palette" }
+              ],
+              paletteTitle: "Color exploration",
+              // colors sampled from the HEARTH renders
+              palette: [
+                { name: "Sage",          color: "#636854", note: "vessel" },
+                { name: "Brushed steel", color: "#847B72", note: "cup" },
+                { name: "Gunmetal",      color: "#322E2A", note: "trim" },
+                { name: "Warm stone",    color: "#CFC5BA", note: "studio" }
+              ]
+            },
+
+            /* 04 FORM DEVELOPMENT */
+            {
+              type: "process",
+              label: "Form Development",
+              title: "From sketch to final form",
+              text: [],
+              steps: [
+                { title: "Initial sketches",
+                  text: "Exploring proportions, handle positions, and how a cup could stack onto the vessel.",
+                  image: { src: "images/hearth-sketches.jpg", focus: "24% 42%", zoom: 1, bg: "#fff",
+                           alt: "Two shaded carafe sketches with handles and a stacked cup" } },
+                { title: "Form iterations",
+                  text: "",
+                  image: { src: "", hint: "Add form iterations", file: "images/hearth-form-iterations.jpg" } },
+                { title: "CAD model",
+                  text: "Modeled in Rhino, shown from the top and in perspective.",
+                  // two views stacked in one step; add or remove { } blocks to change how many
+                  images: [
+                    { src: "images/hearth-cad-top.jpg", focus: "50% 37%", zoom: 1.5,
+                      alt: "Rhino top view of the HEARTH model: the round lid with its pour tab and the handle" },
+                    { src: "images/hearth-cad-perspective.jpg", focus: "59.5% 57%", zoom: 1.5,
+                      alt: "Rhino perspective view of the HEARTH model showing the lid, handle, vessel, and nesting cup surfaces" }
+                  ] },
+                { title: "Final design",
+                  text: "The selected form, rendered with its textured sage finish and brushed metal cup.",
+                  image: { src: "images/hearth-three-quarter.jpg", focus: "50% 48%", zoom: 1.25,
+                           alt: "Final HEARTH render floating at a three-quarter angle" } }
+              ]
+            },
+
+            /* 05 PRODUCT DETAILS - x / y place each numbered dot, as % across and down the image */
+            {
+              type: "details",
+              label: "Product Details",
+              title: "Anatomy of the carafe",
+              text: [],
+              image: { src: "images/hearth-detached.jpg", bg: "#D9D0C5",
+                       alt: "HEARTH carafe with its lid on, floating above the detached nesting cup" },
+              callouts: [
+                { title: "Pouring lid",      text: "Integrated lid with a pour tab.",                     x: 47, y: 8.5 },
+                { title: "Handle",           text: "A single sculpted handle for pouring.",               x: 67, y: 27 },
+                { title: "Insulated vessel", text: "Main body in a textured sage finish.",                x: 46, y: 27 },
+                { title: "Metal base",       text: "Brushed metal lower section that nests into the cup.", x: 49, y: 47 },
+                { title: "Nesting cup",      text: "Brushed metal cup with a sage grip band.",           x: 49, y: 66 }
+              ],
+              exploded: {
+                label: "Exploded view",
+                title: "Lid, carafe, and nesting cup",
+                text: "Three parts: the threaded pouring lid, the insulated carafe, and the cup that nests onto its base.",
+                image: { src: "images/hearth-exploded-metal.jpg",
+                         alt: "Exploded view of HEARTH: the lid floating above the carafe, which floats above the nesting cup" }
+              }
+            },
+
+            /* 06 NESTING SYSTEM */
+            {
+              type: "nesting",
+              label: "Nesting System",
+              title: "Packs as one. Serves as two.",
+              text: [
+                "The cup lives on the carafe, so the whole set travels as a single compact piece."
+              ],
+              configs: [
+                { title: "Packed", text: "Cup attached to the base for transport.",
+                  image: { src: "images/hearth-outdoors.jpg", focus: "73.4% 41.4%", zoom: 1.2,
+                           alt: "HEARTH with its cup attached, standing on a wooden table in a forest" } },
+                { title: "Separated", text: "Cup detached from the vessel.",
+                  image: { src: "images/hearth-exploded.jpg", focus: "53% 57.6%", zoom: 1.05,
+                           alt: "The HEARTH carafe lifted off its nesting cup" } },
+                { title: "Serving", text: "Carafe pouring into the cup.",
+                  image: { src: "images/hearth-pour.jpg", focus: "42% 50%", zoom: 1.05,
+                           alt: "A hand pouring water from the HEARTH carafe into its cup" } }
+              ],
+              statement: ""                                  // big line under the three photos; "" for none
+            },
+
+            /* 07 FINAL DESIGN - each row holds 1 image (full width) or 2 (side by side) */
+            {
+              type: "gallery",
+              label: "Final Design",
+              title: "Final design",
+              text: [],
+              rows: [
+                [ { src: "images/hearth-pour.jpg",
+                    alt: "A hand in a green sleeve pouring from HEARTH into its cup" },
+                  { src: "images/hearth-sunlight.jpg", focus: "77.5% 14%", zoom: 2.2,
+                    alt: "Close-up of the HEARTH lid and pour tab in warm sunlight, with water droplets on the textured surface" } ],
+                [ { src: "images/hearth-detached.jpg", focus: "62.6% 30%", zoom: 2.2,
+                    alt: "Close-up of the HEARTH handle and the brushed metal section below the sage body" },
+                  { src: "images/hearth-table.jpg", focus: "74% 50%",
+                    alt: "HEARTH on the corner of a weathered wooden table in a sunlit forest" } ],
+                { title: "Full Color Collection", images: [
+                  { src: "images/hearth-color-clay.jpg", focus: "52% 46%", caption: "Terracotta Clay",
+                    alt: "HEARTH in a clay red finish with a brushed metal cup, floating against a warm grey backdrop" },
+                  { src: "images/hearth-color-sky.jpg", focus: "52% 46%", caption: "Pale Sky",
+                    alt: "HEARTH in a pale blue finish with a brushed metal cup, floating against a warm grey backdrop" },
+                  { src: "images/hearth-color-charcoal.jpg", focus: "52% 46%", caption: "Evergreen",
+                    alt: "HEARTH in a charcoal grey finish with an olive metal cup, floating against a warm grey backdrop" } ] }
+              ]
+            },
+
+            /* 08 WHAT I LEARNED - text over a faded forest photo */
+            {
+              type: "reflection",
+              label: "Reflection",
+              title: "What I learned",
+              text: [
+                "Designing HEARTH taught me how much a product’s parts have to agree with each other. The cup, the metal base, and the vessel all had to share one set of proportions so they could nest cleanly, look like a single object when packed, and still work on their own at camp.",
+                "Moving from loose sketches to a CAD model showed me where early ideas needed real dimensions, and rendering the final form helped me judge finish and color in context. Next, I’d build a physical prototype to test the fit between the cup and the carafe, the feel of the handle when it’s full, and how well the insulation holds up on a cold morning outside."
+              ],
+              background: "images/hearth-outdoors.jpg",     // faded nature photo behind the text
+              backgroundPosition: "0% 30%",               // left side of the photo: forest, not the product
+              backgroundZoom: 1.75,                        // zoomed in so only the forest shows
+              nextLabel: "Next project",
+              backLabel: "Portfolio"
             }
           ]
         }
