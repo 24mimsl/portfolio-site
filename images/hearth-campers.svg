@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440" fill="none" stroke="#7D7550" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+  <!-- sky + sun -->
+  <circle cx="512" cy="92" r="34" fill="#E4E0CC"/>
+  <!-- mountains -->
+  <path d="M20 300 L160 130 L230 210 L310 110 L450 290" fill="#ECE9DC"/>
+  <path d="M286 140 L310 110 L334 140 L318 134 L310 144 L300 134 Z" fill="#fff"/>
+  <path d="M138 157 L160 130 L182 157 L168 151 L160 160 L150 151 Z" fill="#fff"/>
+  <!-- ground -->
+  <path d="M20 360 Q180 330 330 350 T620 340"/>
+  <!-- pine trees -->
+  <path d="M78 352 V320 M78 230 L50 280 H64 L42 322 H114 L92 280 H106 Z" fill="#E4E0CC"/>
+  <path d="M582 344 V316 M582 236 L558 278 H570 L552 316 H612 L594 278 H606 Z" fill="#E4E0CC"/>
+  <!-- tent -->
+  <path d="M370 346 L440 250 L510 346 Z" fill="#E4E0CC"/>
+  <path d="M440 250 L440 346 M440 280 L418 346 M440 280 L462 346"/>
+  <path d="M440 250 L452 236"/>
+  <!-- hiker 1 -->
+  <circle cx="186" cy="214" r="13" fill="#fff"/>
+  <path d="M190 230 L196 282 L178 340 M196 282 L216 338"/>
+  <path d="M168 236 h-6 a10 10 0 0 0 -10 10 v34 a8 8 0 0 0 8 8 h16 Z" fill="#C6BD98"/>
+  <path d="M192 240 L222 266 M224 234 L224 344"/>
+  <!-- hiker 2 -->
+  <circle cx="276" cy="226" r="12" fill="#fff"/>
+  <path d="M280 241 L284 290 L268 344 M284 290 L302 342"/>
+  <path d="M260 246 h-6 a9 9 0 0 0 -9 9 v30 a8 8 0 0 0 8 8 h14 Z" fill="#C6BD98"/>
+  <path d="M282 250 L306 274 M310 244 L310 346"/>
+  <!-- trail dashes -->
+  <path d="M120 392 Q260 376 400 396 T620 392" stroke-dasharray="2 16"/>
+</svg>

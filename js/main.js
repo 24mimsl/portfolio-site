@@ -905,6 +905,18 @@
       sec.appendChild(stHead(num, s));
 
       if (s.type === "concept") {
+        if (s.problem) {
+          var prob = make("div", "st-problem");
+          var art0 = make("div", "st-problem-art");
+          var pimg = make("img"); pimg.src = s.problem.image.src; pimg.alt = s.problem.image.alt || "";
+          art0.appendChild(pimg);
+          prob.appendChild(art0);
+          var ptxt = make("div", "st-problem-text");
+          if (s.problem.title) ptxt.appendChild(make("h3", null, s.problem.title));
+          (s.problem.text || []).forEach(function (t) { ptxt.appendChild(make("p", null, t)); });
+          prob.appendChild(ptxt);
+          sec.appendChild(prob);
+        }
         var feats = make("div", "st-features");
         (s.features || []).forEach(function (ft, j) {
           var art = make("article", "st-feature");

@@ -304,6 +304,15 @@ window.SITE_CONTENT = {
               text: [
                 "HEARTH combines a camp carafe and its cup in a single object. The cup rides on the base of the insulated vessel on the way out and comes off at camp, so there’s one less thing to pack."
               ],
+              // light blue graphic + the problem HEARTH answers (shown above the features)
+              problem: {
+                image: { src: "images/hearth-campers.svg", alt: "Light blue line drawing of two hikers walking past a tent, pine trees, and mountains" },
+                title: "The problem on the trail",
+                text: [
+                  "Campers and hikers count every item they carry. A hot drink outdoors usually means packing a thermos plus a separate mug for each person: loose pieces that rattle around a bag, get misplaced at camp, or never make it out of the car.",
+                  "What if the cup was part of the vessel? HEARTH keeps everything together in one piece that packs as easily as it pours."
+                ]
+              },
               features: [
                 { title: "Integrated pouring lid",
                   text: "Pour straight from the carafe without taking the lid off.",
@@ -363,9 +372,6 @@ window.SITE_CONTENT = {
                   text: "Exploring proportions, handle positions, and how a cup could stack onto the vessel.",
                   image: { src: "images/hearth-sketches.jpg", focus: "24% 42%", zoom: 1, bg: "#fff",
                            alt: "Two shaded carafe sketches with handles and a stacked cup" } },
-                { title: "Form iterations",
-                  text: "",
-                  image: { src: "", hint: "Add form iterations", file: "images/hearth-form-iterations.jpg" } },
                 { title: "CAD model",
                   text: "Modeled in Rhino, shown from the top and in perspective.",
                   // two views stacked in one step; add or remove { } blocks to change how many
